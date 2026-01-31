@@ -15,6 +15,7 @@ export default function Home() {
             <div className="space-y-8">
               <div className="inline-flex items-center space-x-2 bg-teal-700/50 px-4 py-2 rounded-full">
                 <Award size={20} />
+                ppppppp
               </div>
               
               <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
