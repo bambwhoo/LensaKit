@@ -12,6 +12,7 @@ export default function Header() {
             <a href="#about" className="hover:text-teal-200 transition">About</a>
             <a href="#services" className="hover:text-teal-200 transition">Services</a>
             <a href="#gallery" className="hover:text-teal-200 transition">Gallery</a>           
+            <a href="#article" className="hover:text-teal-200 transition">Article</a>           
             <a href="#contact" className="hover:text-teal-200 transition">Contact</a>
           </div>
 

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Search, MapPin, Home as HomeIcon, Building2, Users, Award, TrendingUp, Shield, ChevronDown, Heart, X, Menu, Mail, Phone, Facebook, Instagram, Twitter } from 'lucide-react';
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [, ] = useState('rent');
@@ -9,8 +10,8 @@ export default function Home() {
       
       {/* Hero Section */}
       <section id="home" className="relative bg-gradient-to-br from-teal-800 to-teal-600 text-white overflow-hidden w-full">
-        <div className="w-h-screen px-6 sm:px-8 lg:px-12 xl:px-16 py-20 lg:py-32">
-          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-[1920px] mx-auto">
+        <div className="min-h-screen px-6 sm:px-8 lg:px-12 xl:px-16 pt-12 pb-20 lg:pt-16 lg:pb-24">
+          <div className="grid lg:grid-cols-2 gap-1 items-center max-w-[1920px] mx-auto">
             <div className="space-y-8">
               <div className="inline-flex items-center space-x-2 bg-teal-700/50 px-4 py-2 rounded-full">
                 <Award size={20} />
@@ -103,60 +104,6 @@ export default function Home() {
               </div>
 
               <div className="absolute right-0 bottom-0 w-64 h-64 bg-teal-600/20 rounded-full blur-3xl"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Profil, Pengalaman & Kelebihan */}
-      <section className="py-20 bg-teal-800 w-full">
-        <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
-          <div className="max-w-[1920px] mx-auto">
-            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-12">
-              Profile
-            </h2>
-
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              
-              {/* Profil */}
-              <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition">
-                <h3 className="text-2xl font-bold mb-4 text-teal-700">
-                  Company profile
-                </h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li><strong>Name:</strong> Lensakita</li>
-                  <li><strong>Since:</strong> 2022</li>
-                  <li><strong>Sector:</strong> Photography & Videography</li>
-                </ul>
-              </div>
-
-              {/* Pengalaman */}
-              <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition">
-                <h3 className="text-2xl font-bold mb-4 text-teal-700">
-                  Experience
-                </h3>
-                <ul className="space-y-2 text-gray-600 list-disc list-inside">
-                  <li>Over <strong>150 photoshootsn</strong></li>
-                  <li>Wedding & Pre-wedding</li>
-                  <li>Graduation, Product, Event</li>
-                  <li>Individual & Corporate Clients</li>
-                </ul>
-              </div>
-
-              {/* Kelebihan */}
-              <div className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition">
-                <h3 className="text-2xl font-bold mb-4 text-teal-700">
-                  Our Advantages
-                </h3>
-                <ul className="space-y-2 text-gray-600 list-disc list-inside">
-                  <li>Professional photographers</li>
-                  <li>High-quality photo editing</li>
-                  <li>Flexible photo concepts</li>
-                  <li>Affordable package prices</li>
-                  <li>Online booking system</li>
-                </ul>
-              </div>
-
             </div>
           </div>
         </div>
@@ -412,7 +359,7 @@ export default function Home() {
 
         <div className="col-span-2 row-span-2 group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer">
           <img
-            src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1000&h=1200&fit=crop"
+            src="https://images.unsplash.com/photo-1633734973050-d6499a977c17?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Graduation Moment"
             className="w-full h-full object-cover transition-all duration-500 
                        group-hover:scale-110 group-hover:blur-sm"
@@ -450,7 +397,7 @@ export default function Home() {
 
         <div className="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer h-56 lg:h-64">
           <img
-            src="https://images.unsplash.com/photo-1581822261290-991b38693d1b?w=800&h=600&fit=crop"
+            src="https://plus.unsplash.com/premium_photo-1663089174939-5870e2e8d62e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZXZlbnR8ZW58MHx8MHx8fDA%3D"
             alt="Event Photography"
             className="w-full h-full object-cover transition-all duration-500 
                        group-hover:scale-110 group-hover:blur-sm"
@@ -466,20 +413,10 @@ export default function Home() {
             </h3>
           </div>
         </div>
-
       </div>
-
-      {/* View More Button */}
-      <div className="text-center mt-12">
-        <button className="bg-teal-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-teal-700 transition">
-          View All Gallery
-        </button>
-      </div>
-
     </div>
   </div>
 </section>
-
 
       {/* Testimonials / Clients */}
       <section className="py-20 bg-white w-full">
@@ -542,12 +479,12 @@ export default function Home() {
       </section>
 
       {/* Artikel / Event */}
-      <section className="py-20 bg-gray-50 w-full">
+      <section id='article' className="py-20 bg-gray-50 w-full">
         <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
           <div className="max-w-[1920px] mx-auto">
             <div className="mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Latest News & Tips</h2>
-              <p className="text-gray-600 text-lg">Stay updated with our latest photography tips and news</p>
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Latest Newss</h2>
+              <p className="text-gray-600 text-lg">Stay updated with our latest photography news</p>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -557,23 +494,25 @@ export default function Home() {
                   category: "Tips",
                   title: "10 Tips Foto Pre-Wedding yang Memukau",
                   date: "January 25, 2026",
-                  excerpt: "Pelajari tips dan trik untuk mendapatkan foto pre-wedding yang romantis dan berkesan..."
+                  excerpt: "Pelajari tips dan trik untuk mendapatkan foto pre-wedding yang romantis dan berkesan...",
+                  link: "/artikel/fotografi-produk-umkm"
                 },
                 {
-                  image: "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&h=600&fit=crop",
+                  image: "https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                   category: "Event",
                   title: "Open Booking Paket Wedding 2026",
                   date: "February 5, 2026",
                   excerpt: "Dapatkan promo spesial untuk paket fotografi pernikahan tahun 2026..."
                 },
                 {
-                  image: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=800&h=600&fit=crop",
+                  image: "https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                   category: "Guide",
                   title: "Panduan Fotografi Produk untuk UMKM",
                   date: "January 20, 2026",
                   excerpt: "Tips praktis memotret produk agar terlihat menarik dan profesional..."
                 }
-              ].map((article, index) => (
+              ]
+              .map((article, index) => (
                 <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition group">
                   <div className="relative overflow-hidden h-48 lg:h-56">
                     <img 
@@ -600,32 +539,253 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Newsletter CTA */}
-      <section className="bg-gray-900 text-white py-16 w-full">
-        <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
-          <div className="max-w-[1920px] mx-auto">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-              <div>
-                <h2 className="text-3xl lg:text-4xl font-bold mb-2">Ready to Capture Your Moments?</h2>
-                <p className="text-gray-300 text-lg">Get started with us today and create lasting memories</p>
-              </div>
-              <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
-                <input 
-                  type="email" 
-                  placeholder="Enter your email..." 
-                  className="px-6 py-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:outline-none focus:border-teal-500 w-full sm:w-80"
-                />
-                <button className="bg-teal-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-teal-700 transition w-full sm:w-auto whitespace-nowrap">
-                  Get Started
-                </button>
-              </div>
-            </div>
+      {/* Contact Us - WhatsApp Booking */}
+<section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 w-full">
+  <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
+    <div className="max-w-4xl mx-auto">
+      
+      {/* Header */}
+      <div className="text-center mb-12">
+        <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          Contact <span className="text-teal-600">Us</span>
+        </h2>
+        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          Isi formulir di bawah ini dan kami akan menghubungkan Anda langsung ke WhatsApp untuk melanjutkan pemesanan
+        </p>
+      </div>
+
+      {/* Booking Form Card */}
+      <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-2xl">
+        
+        <div className="flex items-center justify-center mb-8">
+          <div className="bg-green-100 p-4 rounded-full">
+            <Phone size={40} className="text-green-600" />
           </div>
         </div>
-      </section>
+
+        <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2 text-center">
+          Formulir Pemesanan Layanan
+        </h3>
+        <p className="text-gray-600 mb-8 text-center">
+          Langsung terhubung ke WhatsApp setelah submit
+        </p>
+
+        <form className="space-y-6" onSubmit={(e) => {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          
+          const name = formData.get('name');
+          const phone = formData.get('phone');
+          const email = formData.get('email');
+          const service = formData.get('service');
+          const date = formData.get('date');
+          const location = formData.get('location');
+          const message = formData.get('message');
+          
+          const whatsappMessage = `Halo LensaKit, saya ingin memesan layanan fotografi:
+
+📝 *INFORMASI PEMESANAN*
+
+*Nama:* ${name}
+*No. HP:* ${phone}
+*Email:* ${email}
+
+📸 *DETAIL LAYANAN*
+
+*Jenis Layanan:* ${service}
+*Tanggal Acara:* ${date}
+*Lokasi:* ${location}
+
+💬 *Pesan Tambahan:*
+${message || 'Tidak ada'}
+
+Mohon informasi lebih lanjut mengenai paket dan harga. Terima kasih!`;
+          
+          const encodedMessage = encodeURIComponent(whatsappMessage);
+          const whatsappURL = `https://wa.me/6281234567890?text=${encodedMessage}`;
+          
+          window.open(whatsappURL, '_blank');
+        }}>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Nama */}
+            <div>
+              <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+                Nama Lengkap <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                placeholder="John Doe"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
+              />
+            </div>
+
+            {/* No HP */}
+            <div>
+              <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                No. WhatsApp <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                placeholder="08123456789"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
+              />
+            </div>
+          </div>
+
+          {/* Email */}
+          <div>
+            <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+              Email <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="johndoe@email.com"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
+            />
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Jenis Layanan */}
+            <div>
+              <label htmlFor="service" className="block text-sm font-semibold text-gray-700 mb-2">
+                Jenis Layanan <span className="text-red-500">*</span>
+              </label>
+              <select
+                id="service"
+                name="service"
+                required
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition bg-white"
+              >
+                <option value="">Pilih Layanan</option>
+                <option value="Wedding Photography">Wedding Photography</option>
+                <option value="Pre-Wedding">Pre-Wedding</option>
+                <option value="Graduation">Graduation</option>
+                <option value="Product Photography">Product Photography</option>
+                <option value="Event Photography">Event Photography</option>
+                <option value="Portrait Session">Portrait Session</option>
+                <option value="Corporate Photography">Corporate Photography</option>
+                <option value="Family Photography">Family Photography</option>
+                <option value="Birthday Party">Birthday Party</option>
+                <option value="Other">Lainnya</option>
+              </select>
+            </div>
+
+            {/* Tanggal */}
+            <div>
+              <label htmlFor="date" className="block text-sm font-semibold text-gray-700 mb-2">
+                Tanggal Acara <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                required
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
+              />
+            </div>
+          </div>
+
+          {/* Lokasi */}
+          <div>
+            <label htmlFor="location" className="block text-sm font-semibold text-gray-700 mb-2">
+              Lokasi Acara <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              required
+              placeholder="Contoh: Jakarta Selatan, Tangerang, Bogor"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
+            />
+          </div>
+
+          {/* Pesan */}
+          <div>
+            <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
+              Pesan Tambahan (Opsional)
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              placeholder="Ceritakan lebih detail tentang kebutuhan fotografi Anda, jumlah tamu, tema acara, dll..."
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition resize-none"
+            ></textarea>
+          </div>
+
+          {/* Info Box */}
+          <div className="bg-teal-50 border border-teal-200 rounded-lg p-4 flex items-start space-x-3">
+            <div className="flex-shrink-0">
+              <svg className="w-6 h-6 text-teal-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <p className="text-sm text-teal-800">
+                Setelah klik tombol di bawah, Anda akan diarahkan ke WhatsApp dengan pesan yang sudah terisi otomatis. Tinggal klik kirim!
+              </p>
+            </div>
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-gradient-to-r from-teal-600 to-teal-400 text-white py-4 rounded-xl font-bold text-lg hover:from-teal-600 hover:to-teal-700 transition shadow-lg flex items-center justify-center space-x-3 group"
+          >
+            <Phone size={24} className="group-hover:rotate-12 transition-transform" />
+            <span>Kirim via WhatsApp</span>
+            <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </button>
+
+          <p className="text-sm text-gray-500 text-center">
+            Dengan mengirim formulir ini, Anda setuju dengan kebijakan privasi kami
+          </p>
+        </form>
+      </div>
+
+      {/* Quick Contact Info */}
+      <div className="mt-12 text-center">
+        <p className="text-gray-600 mb-4">Atau hubungi kami langsung:</p>
+        <div className="flex flex-wrap justify-center gap-4">
+          <a
+            href="https://wa.me/6289505837367"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center space-x-2 bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition"
+          >
+            <Phone size={20} />
+            <span>+62 895-0583-7367</span>
+          </a>
+          
+          <a
+            href="mailto:info@lensakit.com"
+            className="inline-flex items-center space-x-2 bg-gray-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
+          >
+            <Mail size={20} />
+            <span>info@lensakit.com</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
-      <footer id="contact" className="bg-black text-white py-12 w-full">
+      <footer className="bg-black text-white py-12 w-full">
         <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
           <div className="max-w-[1920px] mx-auto">
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
