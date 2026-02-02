@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
-import AdminSidbar from "./components/admin/AdminSidbar";
+import AdminSidbar from "./components/admin/AdminSidebar";
 
 // Client Pages
 import Home from "./pages/Home";

@@ -2,12 +2,21 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import db from "./db/connection.js";
+import adminRoutes from "./routes/adminRoutes.js";
+import clientRoutes from "./routes/clientRoutes.js";
+import artikelRoutes from "./routes/artikelRoutes.js";
+
+
 
 dotenv.config();
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+app.use("/api/admin", adminRoutes);
+app.use("/api/client", clientRoutes);
+app.use("/api/artikel", artikelRoutes);
 
 // contoh route awal
 app.get("/", (req, res) => {
