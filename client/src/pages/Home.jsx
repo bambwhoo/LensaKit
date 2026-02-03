@@ -1,16 +1,37 @@
 import { useEffect, useState } from 'react';
-import { Search, MapPin, Home as HomeIcon, Building2, Users, Award, TrendingUp, Shield, ChevronDown, Heart, X, Menu, Mail, Phone, Facebook, Instagram, Twitter } from 'lucide-react';
 import { Link } from "react-router-dom";
+import {
+  Search, MapPin, Home as HomeIcon, Building2, Users,
+  Award, TrendingUp, Shield, ChevronDown, Heart,
+  X, Menu, Mail, Phone, Facebook, Instagram, Twitter
+} from 'lucide-react';
 
 export default function Home() {
-  const [, ] = useState('rent');
+  const [artikels, setArtikels] = useState([]);
+  const [loadingArtikel, setLoadingArtikel] = useState(true);
 
   const [clients, setClients] = useState([]);
+
+  // FETCH CLIENT
   useEffect(() => {
     fetch("http://localhost:5000/api/client")
       .then(res => res.json())
       .then(data => setClients(data))
       .catch(err => console.error("Gagal ambil partners:", err));
+  }, []);
+
+  // FETCH ARTIKEL
+  useEffect(() => {
+    fetch("http://localhost:5000/api/artikel")
+      .then(res => res.json())
+      .then(data => {
+        setArtikels(data);
+        setLoadingArtikel(false);
+      })
+      .catch(err => {
+        console.error("Gagal ambil artikel:", err);
+        setLoadingArtikel(false);
+      });
   }, []);
 
   return (
@@ -487,65 +508,69 @@ export default function Home() {
 </section>
 
       {/* Artikel / Event */}
-      <section id='article' className="py-20 bg-gray-50 w-full">
-        <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
-          <div className="max-w-[1920px] mx-auto">
-            <div className="mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Latest Newss</h2>
-              <p className="text-gray-600 text-lg">Stay updated with our latest photography news</p>
-            </div>
+<section id="article" className="py-20 bg-gray-50 w-full">
+  <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
+    <div className="max-w-[1920px] mx-auto">
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  image: "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800&h=600&fit=crop",
-                  category: "Tips",
-                  title: "10 Tips Foto Pre-Wedding yang Memukau",
-                  date: "January 25, 2026",
-                  excerpt: "Pelajari tips dan trik untuk mendapatkan foto pre-wedding yang romantis dan berkesan...",
-                  link: "/artikel/fotografi-produk-umkm"
-                },
-                {
-                  image: "https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  category: "Event",
-                  title: "Open Booking Paket Wedding 2026",
-                  date: "February 5, 2026",
-                  excerpt: "Dapatkan promo spesial untuk paket fotografi pernikahan tahun 2026..."
-                },
-                {
-                  image: "https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  category: "Guide",
-                  title: "Panduan Fotografi Produk untuk UMKM",
-                  date: "January 20, 2026",
-                  excerpt: "Tips praktis memotret produk agar terlihat menarik dan profesional..."
-                }
-              ]
-              .map((article, index) => (
-                <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition group">
-                  <div className="relative overflow-hidden h-48 lg:h-56">
-                    <img 
-                      src={article.image} 
-                      alt={article.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                    />
-                    <span className="absolute top-4 left-4 bg-teal-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                      {article.category}
-                    </span>
-                  </div>
-                  <div className="p-6">
-                    <p className="text-sm text-gray-500 mb-2">{article.date}</p>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">{article.title}</h3>
-                    <p className="text-gray-600 mb-4">{article.excerpt}</p>
-                    <button className="text-teal-600 font-semibold hover:text-teal-700 transition">
-                      Read More →
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+      <div className="mb-16">
+        <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          Latest News
+        </h2>
+        <p className="text-gray-600 text-lg">
+          Stay updated with our latest photography news
+        </p>
+      </div>
+
+      {loadingArtikel ? (
+        <p className="text-center text-gray-500">Loading artikel...</p>
+      ) : (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {artikels.map((item) => (
+  <div
+    key={item.id}
+    className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition group"
+  >
+    {/* IMAGE */}
+    <div className="relative overflow-hidden h-48 lg:h-56">
+      <img
+        src={item.thambnail}
+        alt={item.judul}
+        className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+      />
+    </div>
+
+    {/* CONTENT */}
+    <div className="p-6">
+      <p className="text-sm text-gray-500 mb-1">{item.penulis}</p>
+
+      <h3 className="text-xl font-bold text-gray-900 mb-3">
+        {item.judul}
+      </h3>
+
+      <p className="text-gray-600 mb-4 line-clamp-3">
+        {item.deskripsi}
+      </p>
+
+      <a
+        href={item.slug}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-teal-600 font-semibold hover:text-teal-700 transition"
+      >
+        Read More →
+      </a>
+    </div>
+  </div>
+))}
+
         </div>
-      </section>
+      )}
+
+    </div>
+  </div>
+</section>
+
+
 
       {/* Contact Us - WhatsApp Booking */}
       <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 w-full">

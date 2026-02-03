@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import slugify from "slugify";
 import AdminSidebar from "../components/admin/AdminSidebar";
+import slugify from "slugify";
 
 const Artikel = () => {
   const [artikels, setArtikels] = useState([]);
@@ -25,19 +25,9 @@ const Artikel = () => {
       const res = await fetch("http://localhost:5000/api/artikel");
       const data = await res.json();
 
-      // map backend field ke frontend
-      const mappedData = data.map((a) => ({
-        id: a.id,
-        judul: a.title,
-        isi: a.content,
-        thumbnail: a.thumbnail,
-        penulis: a.penulis,
-        slug: a.slug,
-      }));
-
-      setArtikels(mappedData);
+      setArtikels(data);
     } catch (err) {
-      console.error(err);
+      console.error("Fetch artikel error:", err);
     } finally {
       setLoading(false);
     }
@@ -48,23 +38,20 @@ const Artikel = () => {
   }, []);
 
   /* =====================
-     DELETE ARTIKEL
+     DELETE
   ===================== */
   const handleDelete = async (id) => {
     if (!confirm("Yakin hapus artikel ini?")) return;
 
-    try {
-      await fetch(`http://localhost:5000/api/artikel/${id}`, {
-        method: "DELETE",
-      });
-      fetchArtikel();
-    } catch (err) {
-      console.error(err);
-    }
+    await fetch(`http://localhost:5000/api/artikel/${id}`, {
+      method: "DELETE",
+    });
+
+    fetchArtikel();
   };
 
   /* =====================
-     HANDLE SUBMIT
+     SUBMIT
   ===================== */
   const handleSubmit = async () => {
     const url = isEdit
@@ -78,8 +65,11 @@ const Artikel = () => {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          title: form.judul,
-          content: form.isi,
+          judul: form.judul,
+          slug:
+            form.slug ||
+            slugify(form.judul, { lower: true, strict: true }),
+          isi: form.isi,
           thumbnail: form.thumbnail,
           penulis: form.penulis,
         }),
@@ -98,22 +88,11 @@ const Artikel = () => {
 
       fetchArtikel();
     } catch (err) {
-      console.error(err);
+      console.error("Submit error:", err);
     }
   };
 
-  /* =====================
-     HANDLE JUDUL CHANGE & SLUG
-  ===================== */
-  const handleJudulChange = (value) => {
-    setForm({
-      ...form,
-      judul: value,
-      slug: slugify(value, { lower: true, strict: true }),
-    });
-  };
-
-  if (loading) return <p className="text-center mt-10">Loading artikel...</p>;
+  if (loading) return <p className="text-center mt-10">Loading...</p>;
 
   return (
     <div className="min-h-screen flex bg-gray-100">
@@ -141,12 +120,12 @@ const Artikel = () => {
         </div>
 
         {/* TABLE */}
-        <div className="bg-white rounded-xl shadow overflow-x-auto">
+        <div className="bg-white rounded-xl shadow">
           <table className="w-full">
             <thead className="bg-gray-100">
               <tr>
-                <th className="p-4">Thumbnail</th>
                 <th className="p-4">Judul</th>
+                <th className="p-4">Slug</th>
                 <th className="p-4">Penulis</th>
                 <th className="p-4 text-center">Aksi</th>
               </tr>
@@ -154,30 +133,24 @@ const Artikel = () => {
             <tbody>
               {artikels.map((item) => (
                 <tr key={item.id} className="border-t">
-                  <td className="p-4">
-                    <img
-                      src={item.thumbnail || "/images/no-image.png"}
-                      className="w-20 h-16 object-cover rounded"
-                      alt={item.judul}
-                    />
-                  </td>
-                  <td className="p-4 font-semibold">{item.judul}</td>
+                  <td className="p-4">{item.judul}</td>
+                  <td className="p-4 text-sm text-gray-500">{item.slug}</td>
                   <td className="p-4">{item.penulis || "-"}</td>
-                  <td className="p-4 flex justify-center gap-2">
+                  <td className="p-4 text-center">
                     <button
                       onClick={() => {
                         setIsEdit(true);
                         setEditId(item.id);
                         setForm({
                           judul: item.judul,
+                          slug: item.slug || "",
                           isi: item.isi,
                           thumbnail: item.thumbnail,
                           penulis: item.penulis,
-                          slug: item.slug,
                         });
                         setShowModal(true);
                       }}
-                      className="bg-blue-500 text-white px-3 py-1 rounded"
+                      className="bg-blue-500 text-white px-3 py-1 rounded mr-2"
                     >
                       Edit
                     </button>
@@ -206,19 +179,24 @@ const Artikel = () => {
                 className="w-full mb-3 p-2 border rounded"
                 placeholder="Judul"
                 value={form.judul}
-                onChange={(e) => handleJudulChange(e.target.value)}
+                onChange={(e) =>
+                  setForm({ ...form, judul: e.target.value })
+                }
               />
 
+              {/* SLUG MANUAL */}
               <input
-                className="w-full mb-3 p-2 border rounded bg-gray-100"
-                placeholder="Slug"
+                className="w-full mb-3 p-2 border rounded"
+                placeholder="Slug (boleh dikosongin)"
                 value={form.slug}
-                disabled
+                onChange={(e) =>
+                  setForm({ ...form, slug: e.target.value })
+                }
               />
 
               <input
                 className="w-full mb-3 p-2 border rounded"
-                placeholder="Thumbnail"
+                placeholder="Thumbnail URL"
                 value={form.thumbnail}
                 onChange={(e) =>
                   setForm({ ...form, thumbnail: e.target.value })
@@ -236,8 +214,8 @@ const Artikel = () => {
 
               <textarea
                 className="w-full mb-4 p-2 border rounded"
-                placeholder="Isi Artikel"
                 rows="5"
+                placeholder="Isi Artikel"
                 value={form.isi}
                 onChange={(e) =>
                   setForm({ ...form, isi: e.target.value })
