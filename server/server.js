@@ -5,6 +5,8 @@ import db from "./db/connection.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import clientRoutes from "./routes/clientRoutes.js";
 import artikelRoutes from "./routes/artikelRoutes.js";
+import galleryRoutes from "./routes/galleryRoutes.js";
+import serviceRoutes from "./routes/serviceRoutes.js";
 
 
 
@@ -17,6 +19,8 @@ app.use(express.json());
 app.use("/api/admin", adminRoutes);
 app.use("/api/client", clientRoutes);
 app.use("/api/artikel", artikelRoutes);
+app.use("/api/galleries", galleryRoutes);
+app.use("/api/services", serviceRoutes);
 
 // contoh route awal
 app.get("/", (req, res) => {

@@ -30,13 +30,6 @@ const Dashboard = () => {
       count: "48"
     },
     { 
-      name: "Event", 
-      table: "event", 
-      icon: "📅",
-      description: "Atur jadwal & event",
-      count: "12"
-    },
-    { 
       name: "Gallery", 
       table: "gallery", 
       icon: "🖼️",
@@ -44,8 +37,8 @@ const Dashboard = () => {
       count: "156"
     },
     { 
-      name: "Jasa", 
-      table: "jasa", 
+      name: "Service", 
+      table: "Service", 
       icon: "🛠️",
       description: "Kelola layanan bisnis",
       count: "8"
@@ -102,74 +95,6 @@ const Dashboard = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* QUICK ACTIONS */}
-        <div className="grid lg:grid-cols-3 gap-5">
-          {/* Quick Actions Card */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h2>
-            
-            <div className="space-y-2">
-              <button className="w-full text-left px-4 py-2.5 bg-gray-50 rounded-lg hover:bg-teal-50 hover:text-teal-700 transition-colors text-gray-700 text-sm font-medium">
-                ➕ Tambah Konten Baru
-              </button>
-              <button className="w-full text-left px-4 py-2.5 bg-gray-50 rounded-lg hover:bg-teal-50 hover:text-teal-700 transition-colors text-gray-700 text-sm font-medium">
-                📊 Lihat Analytics
-              </button>
-              <button className="w-full text-left px-4 py-2.5 bg-gray-50 rounded-lg hover:bg-teal-50 hover:text-teal-700 transition-colors text-gray-700 text-sm font-medium">
-                ⚙️ Pengaturan Website
-              </button>
-            </div>
-          </div>
-
-          {/* Recent Activity */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4">Recent Activity</h2>
-            
-            <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center text-sm flex-shrink-0">
-                  📝
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-800">Artikel baru ditambahkan</p>
-                  <p className="text-xs text-gray-500">2 jam yang lalu</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center text-sm flex-shrink-0">
-                  👥
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-800">Client baru terdaftar</p>
-                  <p className="text-xs text-gray-500">5 jam yang lalu</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center text-sm flex-shrink-0">
-                  🖼️
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-800">Gallery diperbarui</p>
-                  <p className="text-xs text-gray-500">1 hari yang lalu</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Tips Card */}
-          <div className="bg-teal-600 rounded-lg p-6 text-white">
-            <h2 className="text-lg font-semibold mb-3">💡 Tips Hari Ini</h2>
-            <p className="text-teal-100 text-sm mb-4">
-              Upload gambar dengan resolusi tinggi untuk hasil gallery yang maksimal. Ukuran ideal: 1920x1080px
-            </p>
-            <button className="bg-white text-teal-600 font-medium px-4 py-2 rounded-lg hover:bg-teal-50 transition-colors text-sm">
-              Lihat Semua Tips
-            </button>
-          </div>
         </div>
       </main>
     </div>

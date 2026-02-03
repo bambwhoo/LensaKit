@@ -65,14 +65,15 @@ const Artikel = () => {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          judul: form.judul,
-          slug:
-            form.slug ||
-            slugify(form.judul, { lower: true, strict: true }),
-          isi: form.isi,
-          thumbnail: form.thumbnail,
-          penulis: form.penulis,
-        }),
+        judul: form.judul,
+        slug: isEdit
+          ? form.slug // EDIT → pakai slug yang ada
+          : slugify(form.judul, { lower: true, strict: true }), // TAMBAH → auto
+        isi: form.isi,
+        thumbnail: form.thumbnail,
+        penulis: form.penulis,
+    }),
+
       });
 
       setShowModal(false);
@@ -113,7 +114,7 @@ const Artikel = () => {
               });
               setShowModal(true);
             }}
-            className="bg-pink-600 text-white px-5 py-2 rounded"
+            className="bg-teal-600 text-white px-5 py-2 rounded"
           >
             + Tambah Artikel
           </button>
@@ -232,7 +233,7 @@ const Artikel = () => {
                 </button>
                 <button
                   onClick={handleSubmit}
-                  className="bg-pink-600 text-white px-4 py-2 rounded"
+                  className="bg-teal-600 text-white px-4 py-2 rounded"
                 >
                   Simpan
                 </button>

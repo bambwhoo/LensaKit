@@ -10,12 +10,11 @@ const AdminSidebar = () => {
   };
 
   const menus = [
-    { name: "Dashboard", path: "/admin/dashboard", icon: "📊" },
-    { name: "Artikel", path: "/admin/artikel", icon: "📝" },
-    { name: "Client", path: "/admin/client", icon: "👥" },
-    { name: "Event", path: "/admin/event", icon: "📅" },
-    { name: "Gallery", path: "/admin/gallery", icon: "🖼️" },
-    { name: "Jasa", path: "/admin/jasa", icon: "🛠️" },
+    { name: "Dashboard", path: "/admin/dashboard", icon: "" },
+    { name: "Artikel", path: "/admin/artikel", icon: "" },
+    { name: "Client", path: "/admin/client", icon: "" },
+    { name: "Gallery", path: "/admin/gallery", icon: "" },
+    { name: "Service", path: "/admin/service", icon: "" },
   ];
 
   return (
@@ -23,9 +22,6 @@ const AdminSidebar = () => {
       {/* LOGO SECTION */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-1">
-          <div className="w-9 h-9 bg-teal-600 rounded-lg flex items-center justify-center">
-            <span className="text-xl">📷</span>
-          </div>
           <h2 className="text-xl font-bold text-gray-800">
             Lensakit
           </h2>

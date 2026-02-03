@@ -5,14 +5,17 @@ import {
   Award, TrendingUp, Shield, ChevronDown, Heart,
   X, Menu, Mail, Phone, Facebook, Instagram, Twitter
 } from 'lucide-react';
+import api from "../api";
 
 export default function Home() {
   const [artikels, setArtikels] = useState([]);
   const [loadingArtikel, setLoadingArtikel] = useState(true);
-
+  const [gallery, setGallery] = useState([]);
   const [clients, setClients] = useState([]);
+  const [services, setServices] = useState([]);
+  
 
-  // FETCH CLIENT
+  // Fetch Client
   useEffect(() => {
     fetch("http://localhost:5000/api/client")
       .then(res => res.json())
@@ -20,7 +23,7 @@ export default function Home() {
       .catch(err => console.error("Gagal ambil partners:", err));
   }, []);
 
-  // FETCH ARTIKEL
+  // Fetch Artikel
   useEffect(() => {
     fetch("http://localhost:5000/api/artikel")
       .then(res => res.json())
@@ -34,27 +37,56 @@ export default function Home() {
       });
   }, []);
 
+  // Fetch Gallery
+  useEffect(() => {
+  const fetchGallery = async () => {
+    try {
+      const res = await api.get("/galleries");
+      setGallery(res.data);
+    } catch (err) {
+      console.error("Gagal fetch gallery:", err);
+    }
+  };
+
+  fetchGallery();
+}, []);
+
+    // Fetch Service
+    useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const res = await api.get("/services");
+        setServices(res.data);
+      } catch (err) {
+        console.error("Gagal fetch services:", err);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
+
   return (
     <div className="w-full min-h-screen bg-white m-0 p-0">
       
-      {/* Hero Section */}
+      {/* Hero */}
       <section
         id="home"
         className="relative bg-teal-900 text-white overflow-hidden w-full min-h-screen flex items-center justify-center"
       >
-        {/* Background Image */}
+        {/* Background */}
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1549969363-fc20d0360248?q=80&w=2070&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1431068799455-80bae0caf685?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Modern Building"
             className="w-full h-full object-cover"
           />
-          {/* Teal Overlay */}
+          {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-teal-800/60 to-teal-600/60"></div>
         </div>
 
         {/* Content */}
-        <div className="flex flex-col items-center space-y-8 lg:space-y-10 max-w-6xl transform -translate-y-6">
+        <div className="flex flex-col items-center space-y-8 lg:space-y-10 max-w-6xl transform -translate-y-16">
         <div className="inline-flex items-center space-x-3 bg-teal-700/50 px-6 py-3 rounded-full text-lg">
           <Award size={24} />
         </div>
@@ -111,7 +143,7 @@ export default function Home() {
               <div className="relative z-10">
                 <h3 className="text-2xl lg:text-3xl font-bold mb-6">Our Vision & Mission</h3>
 
-                {/* Vision */}
+                {/* Visi */}
                 <div className="mb-8">
                   <h4 className="text-lg lg:text-xl font-semibold mb-3 text-teal-300">Vision</h4>
                   <p className="text-gray-300 text-base lg:text-lg">
@@ -119,7 +151,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                {/* Mission */}
+                {/* Misi */}
                 <div>
                   <h4 className="text-lg lg:text-xl font-semibold mb-3 text-teal-300">Mission</h4>
                   <ul className="list-disc list-inside space-y-2 text-gray-300 text-base lg:text-lg">
@@ -137,315 +169,61 @@ export default function Home() {
       </section>
 
       {/* Service */}
-      <section id="services" className="py-20 bg-white w-full">
-        <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
-          <div className="max-w-[1920px] mx-auto">
-            <div className="mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                Our <span className="text-teal-600">Photography Services</span>
-              </h2>
-              <p className="text-gray-600 max-w-3xl text-lg">
-                Discover our comprehensive photography services tailored to capture your special moments
-              </p>
-            </div>
+<section id="services" className="py-20 bg-white w-full">
+      <div className="max-w-[1920px] mx-auto px-6">
+        <h2 className="text-4xl font-bold mb-4">
+          Our <span className="text-teal-600">Photography Services</span>
+        </h2>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              <div className="relative group overflow-hidden rounded-2xl shadow-lg cursor-pointer h-80 lg:h-96">
-                <img 
-                  src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop" 
-                  alt="Wedding Photography" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-                <div className="absolute bottom-6 left-6 text-white">
-                  <h3 className="text-2xl font-bold mb-2">Wedding Photography</h3>
-                  <p className="text-sm text-gray-200 mb-3">Capture your special day beautifully</p>
-                </div>
-              </div>
-
-              <div className="relative group overflow-hidden rounded-2xl shadow-lg cursor-pointer h-80 lg:h-96">
-                <img 
-                  src="https://images.unsplash.com/photo-1623461487986-9400110de28e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                  alt="Graduation Photography" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-                <div className="absolute bottom-6 left-6 text-white">
-                  <h3 className="text-2xl font-bold mb-2">Graduation Photography</h3>
-                  <p className="text-sm text-gray-200 mb-3">Celebrate your achievement</p>
-                </div>
-              </div>
-
-              <div className="relative group overflow-hidden rounded-2xl shadow-lg cursor-pointer h-80 lg:h-96">
-                <img 
-                  src="https://plus.unsplash.com/premium_photo-1675896084254-dcb626387e1e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D" 
-                  alt="Product Photography" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-                <div className="absolute bottom-6 left-6 text-white">
-                  <h3 className="text-2xl font-bold mb-2">Product Photography</h3>
-                  <p className="text-sm text-gray-200 mb-3">Showcase your products perfectly</p>
-                </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {services.map((s) => (
+            <div
+              key={s.id}
+              className="relative group overflow-hidden rounded-2xl shadow-lg cursor-pointer h-80 lg:h-96"
+            >
+              <img
+                src={s.image}
+                alt={s.title}
+                className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+              <div className="absolute bottom-6 left-6 text-white">
+                <h3 className="text-2xl font-bold mb-2">{s.title}</h3>
               </div>
             </div>
-          </div>
+          ))}
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* Gallery */}
       <section id="gallery" className="py-20 bg-gray-50 w-full">
-        <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
-          <div className="max-w-[1920px] mx-auto">
-            
-            <div className="mb-16">
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                Gallery
-              </h2>
-              <p className="text-gray-600 text-lg">
-                Explore our best photography works
-              </p>
-            </div>
-        
-            {/* Clean Grid Layout with varied rectangular sizes */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
-              
-              {/* Row 1 */}
-              <div className="col-span-2 row-span-2 group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer">
+        <div className="max-w-[1920px] mx-auto px-6">
+          <h2 className="text-4xl font-bold mb-4">Gallery</h2>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {gallery.map((item) => (
+              <div
+                key={item.id}
+                className="group relative rounded-2xl overflow-hidden shadow-lg"
+              >
                 <img
-                  src="https://images.unsplash.com/photo-1513262834354-6b2bca9b5b8d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&      ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt="Elegant Wedding"
-                  className="w-full h-full object-cover transition-all duration-500 
-                             group-hover:scale-110 group-hover:blur-sm"
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-black/40 opacity-0 
-                                group-hover:opacity-100 transition duration-500" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-white text-2xl lg:text-3xl font-semibold tracking-wide
-                                 opacity-0 translate-y-4
-                                 group-hover:opacity-100 group-hover:translate-y-0
-                                 transition-all duration-500">
-                    Elegant Wedding
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
+                  <h3 className="text-white text-xl font-semibold">
+                    {item.title}
                   </h3>
                 </div>
               </div>
-        
-              <div className="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer h-56 lg:h-64">
-                <img
-                  src="https://plus.unsplash.com/premium_photo-1713296255442-e9338f42aad8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&     ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z3JhZHVhdGlvbnxlbnwwfHwwfHx8MA%3D%3D"
-                  alt="Graduation Day"
-                  className="w-full h-full object-cover transition-all duration-500 
-                             group-hover:scale-110 group-hover:blur-sm"
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 
-                                group-hover:opacity-100 transition duration-500" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-white text-lg lg:text-xl font-semibold tracking-wide
-                                 opacity-0 translate-y-4
-                                 group-hover:opacity-100 group-hover:translate-y-0
-                                 transition-all duration-500">
-                    Graduation Day
-                  </h3>
-                </div>
-              </div>
-        
-              <div className="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer h-56 lg:h-64">
-                <img
-                  src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=600&fit=crop"
-                  alt="Product Showcase"
-                  className="w-full h-full object-cover transition-all duration-500 
-                             group-hover:scale-110 group-hover:blur-sm"
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 
-                                group-hover:opacity-100 transition duration-500" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-white text-lg lg:text-xl font-semibold tracking-wide
-                                 opacity-0 translate-y-4
-                                 group-hover:opacity-100 group-hover:translate-y-0
-                                 transition-all duration-500">
-                    Product Showcase
-                  </h3>
-                </div>
-              </div>
-        
-              <div className="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer h-56 lg:h-64">
-                <img
-                  src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=600&fit=crop"
-                  alt="Corporate Event"
-                  className="w-full h-full object-cover transition-all duration-500 
-                             group-hover:scale-110 group-hover:blur-sm"
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 
-                                group-hover:opacity-100 transition duration-500" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-white text-lg lg:text-xl font-semibold tracking-wide
-                                 opacity-0 translate-y-4
-                                 group-hover:opacity-100 group-hover:translate-y-0
-                                 transition-all duration-500">
-                    Corporate Event
-                  </h3>
-                </div>
-              </div>
-        
-              <div className="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer h-56 lg:h-64">
-                <img
-                  src="https://plus.unsplash.com/premium_photo-1673292293042-cafd9c8a3ab3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&     ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bmF0dXJlfGVufDB8fDB8fHww"
-                  alt="Nature Photography"
-                  className="w-full h-full object-cover transition-all duration-500 
-                             group-hover:scale-110 group-hover:blur-sm"
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 
-                                group-hover:opacity-100 transition duration-500" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-white text-lg lg:text-xl font-semibold tracking-wide
-                                 opacity-0 translate-y-4
-                                 group-hover:opacity-100 group-hover:translate-y-0
-                                 transition-all duration-500">
-                    Nature Photography
-                  </h3>
-                </div>
-              </div>
-        
-              {/* Row 2 */}
-              <div className="col-span-2 group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer h-56 lg:h-72">
-                <img
-                  src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&      ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt="Fashion Photography"
-                  className="w-full h-full object-cover transition-all duration-500 
-                             group-hover:scale-110 group-hover:blur-sm"
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 
-                                group-hover:opacity-100 transition duration-500" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-white text-xl lg:text-2xl font-semibold tracking-wide
-                                 opacity-0 translate-y-4
-                                 group-hover:opacity-100 group-hover:translate-y-0
-                                 transition-all duration-500">
-                    Fashion Photography
-                  </h3>
-                </div>
-              </div>
-        
-              <div className="col-span-2 group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer h-56 lg:h-72">
-                <img
-                  src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&h=600&fit=crop"
-                  alt="Romantic Wedding"
-                  className="w-full h-full object-cover transition-all duration-500 
-                             group-hover:scale-110 group-hover:blur-sm"
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 
-                                group-hover:opacity-100 transition duration-500" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-white text-xl lg:text-2xl font-semibold tracking-wide
-                                 opacity-0 translate-y-4
-                                 group-hover:opacity-100 group-hover:translate-y-0
-                                 transition-all duration-500">
-                    Romantic Wedding
-                  </h3>
-                </div>
-              </div>
-        
-              {/* Row 3 */}
-              <div className="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer h-56 lg:h-64">
-                <img
-                  src="https://images.unsplash.com/photo-1765871902179-04336fa1b0ef?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&      ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt="Pre-Wedding"
-                  className="w-full h-full object-cover transition-all duration-500 
-                             group-hover:scale-110 group-hover:blur-sm"
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 
-                                group-hover:opacity-100 transition duration-500" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-white text-lg lg:text-xl font-semibold tracking-wide
-                                 opacity-0 translate-y-4
-                                 group-hover:opacity-100 group-hover:translate-y-0
-                                 transition-all duration-500">
-                    Pre-Wedding
-                  </h3>
-                </div>
-              </div>
-        
-              <div className="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer h-56 lg:h-64">
-                <img
-                  src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1638&auto=format&fit=crop&ixlib=rb-4.1.0&      ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt="Product Photography"
-                  className="w-full h-full object-cover transition-all duration-500 
-                             group-hover:scale-110 group-hover:blur-sm"
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 
-                                group-hover:opacity-100 transition duration-500" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-white text-lg lg:text-xl font-semibold tracking-wide
-                                 opacity-0 translate-y-4
-                                 group-hover:opacity-100 group-hover:translate-y-0
-                                 transition-all duration-500">
-                    Product Photography
-                  </h3>
-                </div>
-              </div>
-        
-              <div className="col-span-2 row-span-2 group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer">
-                <img
-                  src="https://images.unsplash.com/photo-1633734973050-d6499a977c17?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&     ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt="Graduation Moment"
-                  className="w-full h-full object-cover transition-all duration-500 
-                             group-hover:scale-110 group-hover:blur-sm"
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 
-                                group-hover:opacity-100 transition duration-500" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-white text-2xl lg:text-3xl font-semibold tracking-wide
-                                 opacity-0 translate-y-4
-                                 group-hover:opacity-100 group-hover:translate-y-0
-                                 transition-all duration-500">
-                    Graduation Moment
-                  </h3>
-                </div>
-              </div>
-        
-              <div className="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer h-56 lg:h-64">
-                <img
-                  src="https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&      ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt="Studio Product"
-                  className="w-full h-full object-cover transition-all duration-500 
-                             group-hover:scale-110 group-hover:blur-sm"
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 
-                                group-hover:opacity-100 transition duration-500" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-white text-lg lg:text-xl font-semibold tracking-wide
-                                 opacity-0 translate-y-4
-                                 group-hover:opacity-100 group-hover:translate-y-0
-                                 transition-all duration-500">
-                    Studio Product
-                  </h3>
-                </div>
-              </div>
-        
-              <div className="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer h-56 lg:h-64">
-                <img
-                  src="https://plus.unsplash.com/premium_photo-1663089174939-5870e2e8d62e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&     ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZXZlbnR8ZW58MHx8MHx8fDA%3D"
-                  alt="Event Photography"
-                  className="w-full h-full object-cover transition-all duration-500 
-                             group-hover:scale-110 group-hover:blur-sm"
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 
-                                group-hover:opacity-100 transition duration-500" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="text-white text-lg lg:text-xl font-semibold tracking-wide
-                                 opacity-0 translate-y-4
-                                 group-hover:opacity-100 group-hover:translate-y-0
-                                 transition-all duration-500">
-                    Event Photography
-                  </h3>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Clients */}
+{/* Client */}
 <section className="py-20 bg-white w-full">
   <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
     <div className="max-w-[1920px] mx-auto">
@@ -459,17 +237,17 @@ export default function Home() {
         </p>
       </div>
 
-      {/* Client Logos Grid */}
+{/* Logo Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 lg:gap-8">
   {clients.map((client) => (
     <div
       key={client.id}
       className="bg-white border-2 border-gray-200 rounded-xl p-6 flex flex-col items-center justify-center
-                 hover:border-teal-500 hover:shadow-lg transition-all duration-300 group"
+                 hover:border-teal-500 hover:shadow-xl transition-all duration-300 group"
     >
       <div className="w-full h-20 mb-4 flex items-center justify-center overflow-hidden rounded-lg">
         <img
-          src={client.logo}// 🔥 PATH DARI DATABASE
+          src={client.logo}
           alt={client.name}
           className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
         />
@@ -481,32 +259,11 @@ export default function Home() {
     </div>
   ))}
       </div>
-
-      {/* Stats */}
-      <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
-        <div className="text-center">
-          <h3 className="text-4xl lg:text-5xl font-bold text-teal-600 mb-2">150+</h3>
-          <p className="text-gray-600 font-medium">Projects Completed</p>
-        </div>
-        <div className="text-center">
-          <h3 className="text-4xl lg:text-5xl font-bold text-teal-600 mb-2">50+</h3>
-          <p className="text-gray-600 font-medium">Corporate Clients</p>
-        </div>
-        <div className="text-center">
-          <h3 className="text-4xl lg:text-5xl font-bold text-teal-600 mb-2">8+</h3>
-          <p className="text-gray-600 font-medium">Years Experience</p>
-        </div>
-        <div className="text-center">
-          <h3 className="text-4xl lg:text-5xl font-bold text-teal-600 mb-2">98%</h3>
-          <p className="text-gray-600 font-medium">Client Satisfaction</p>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
 
-      {/* Artikel / Event */}
+      {/* Article */}
 <section id="article" className="py-20 bg-gray-50 w-full">
   <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
     <div className="max-w-[1920px] mx-auto">
@@ -529,7 +286,7 @@ export default function Home() {
     key={item.id}
     className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition group"
   >
-    {/* IMAGE */}
+    {/* Image */}
     <div className="relative overflow-hidden h-48 lg:h-56">
       <img
         src={item.thumbnail}
@@ -538,7 +295,7 @@ export default function Home() {
       />
     </div>
 
-    {/* CONTENT */}
+    {/* Content */}
     <div className="p-6">
       <p className="text-sm text-gray-500 mb-1">{item.penulis}</p>
 
@@ -571,7 +328,7 @@ export default function Home() {
 
 
 
-      {/* Contact Us - WhatsApp Booking */}
+      {/* Contact Us */}
       <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 w-full">
         <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
           <div className="max-w-4xl mx-auto">
@@ -586,12 +343,12 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Booking Form Card */}
+            {/* Form */}
             <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-2xl">
 
               <div className="flex items-center justify-center mb-8">
-                <div className="bg-green-100 p-4 rounded-full">
-                  <Phone size={40} className="text-green-600" />
+                <div className="bg-teal-100 p-4 rounded-full">
+                  <Phone size={40} className="text-teal-600" />
                 </div>
               </div>
 
@@ -793,7 +550,7 @@ export default function Home() {
                   href="https://wa.me/6289505837367"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition"
+                  className="inline-flex items-center space-x-2 bg-teal-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-teal-600 transition"
                 >
                   <Phone size={20} />
                   <span>+62 895-0583-7367</span>

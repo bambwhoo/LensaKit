@@ -4,9 +4,8 @@ import AdminSidbar from "./components/admin/AdminSidebar";
 
 // Client Pages
 import Home from "./pages/Home";
-import Jasa from "./pages/Jasa";
+import Service from "./pages/Service";
 import Artikel from "./pages/Artikel";
-import Event from "./pages/Event";
 import Login from "./pages/Login";
 import Client from "./pages/Client";
 
@@ -31,8 +30,7 @@ export default function App() {
       <Route path="/admin/gallery" element={<Gallery />} />
       <Route path="/admin/client" element={<Client />} />
       <Route path="/admin/artikel" element={<Artikel />} />
-      <Route path="/admin/event" element={<Event />} />
-      <Route path="/admin/jasa" element={<Jasa />} />
+      <Route path="/admin/service" element={<Service />} />
     </Routes>
   );
 }
