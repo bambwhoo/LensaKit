@@ -196,6 +196,7 @@ const Artikel = () => {
 
               <input
                 className="w-full mb-3 p-2 border rounded"
+                // type="file"
                 placeholder="Thumbnail URL"
                 value={form.thumbnail}
                 onChange={(e) =>

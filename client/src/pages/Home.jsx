@@ -532,7 +532,7 @@ export default function Home() {
     {/* IMAGE */}
     <div className="relative overflow-hidden h-48 lg:h-56">
       <img
-        src={item.thambnail}
+        src={item.thumbnail}
         alt={item.judul}
         className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
       />
