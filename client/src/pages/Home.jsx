@@ -15,7 +15,6 @@ export default function Home() {
             <div className="space-y-8">
               <div className="inline-flex items-center space-x-2 bg-teal-700/50 px-4 py-2 rounded-full">
                 <Award size={20} />
-                ppppppp
               </div>
               
               <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
@@ -103,7 +102,6 @@ export default function Home() {
                   </ul>
                 </div>
               </div>
-
               <div className="absolute right-0 bottom-0 w-64 h-64 bg-teal-600/20 rounded-full blur-3xl"></div>
             </div>
           </div>
@@ -496,7 +494,6 @@ export default function Home() {
                   title: "10 Tips Foto Pre-Wedding yang Memukau",
                   date: "January 25, 2026",
                   excerpt: "Pelajari tips dan trik untuk mendapatkan foto pre-wedding yang romantis dan berkesan...",
-                  link: "/artikel/fotografi-produk-umkm"
                 },
                 {
                   image: "https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -559,8 +556,8 @@ export default function Home() {
       <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-2xl">
         
         <div className="flex items-center justify-center mb-8">
-          <div className="bg-green-100 p-4 rounded-full">
-            <Phone size={40} className="text-green-600" />
+          <div className="bg-teal-100 p-4 rounded-full">
+            <Phone size={40} className="text-teal-600" />
           </div>
         </div>
 
@@ -765,7 +762,7 @@ Mohon informasi lebih lanjut mengenai paket dan harga. Terima kasih!`;
             href="https://wa.me/6289505837367"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition"
+            className="inline-flex items-center space-x-2 bg-teal-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-teal-600 transition"
           >
             <Phone size={20} />
             <span>+62 895-0583-7367</span>

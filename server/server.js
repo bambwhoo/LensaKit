@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import db from "./db/connection.js";
+import adminRoutes from "./routes/adminRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -13,6 +14,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
 res.json({ message: "API berhasil berjalan 🚀" });
 });
+
+// routes
+app.use("/admin", adminRoutes);
 
 // jalankan server
 const PORT = process.env.PORT || 5000;
