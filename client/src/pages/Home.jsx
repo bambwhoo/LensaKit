@@ -130,7 +130,6 @@ export default function Home() {
                   </ul>
                 </div>
               </div>
-
               <div className="absolute right-0 bottom-0 w-64 h-64 bg-teal-600/20 rounded-full blur-3xl"></div>
             </div>
           </div>
