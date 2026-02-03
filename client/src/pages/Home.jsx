@@ -469,7 +469,7 @@ export default function Home() {
     >
       <div className="w-full h-20 mb-4 flex items-center justify-center overflow-hidden rounded-lg">
         <img
-          src={`http://localhost:5000${client.logo}`}// 🔥 PATH DARI DATABASE
+          src={client.logo}// 🔥 PATH DARI DATABASE
           alt={client.name}
           className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
         />
