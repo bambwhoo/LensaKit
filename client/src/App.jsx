@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
-import AdminSidbar from "./components/admin/AdminSidebar";
+import AdminSidebar from "./components/admin/AdminSidebar";
 
 // Client Pages
 import Home from "./pages/Home";
@@ -12,6 +12,7 @@ import Client from "./pages/Client";
 // Admin Pages
 import Dashboard from "./pages/Dashboard";
 import Gallery from "./pages/Gallery";
+import ArtikelDetail from "./pages/ArtikelDetail";
 
 export default function App() {
   return (
@@ -19,13 +20,15 @@ export default function App() {
       {/* CLIENT */}
       <Route element={<Layout />}>
       <Route path="/" element={<Home />} />
+      <Route path="/artikel/:slug" element={<ArtikelDetail />} />
+
       </Route>
 
       {/* AUTH */}
       <Route path="/login" element={<Login />} />
 
       {/* ADMIN */}
-      <Route path="/admin" element={<AdminSidbar />}/>
+      <Route path="/admin" element={<AdminSidebar />}/>
       <Route path="/admin/dashboard" element={<Dashboard />} />
       <Route path="/admin/gallery" element={<Gallery />} />
       <Route path="/admin/client" element={<Client />} />

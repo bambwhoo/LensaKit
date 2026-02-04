@@ -15,6 +15,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/admin", adminRoutes);
 app.use("/api/client", clientRoutes);
@@ -27,8 +28,7 @@ app.get("/", (req, res) => {
 res.json({ message: "API berhasil berjalan 🚀" });
 });
 
-// routes
-app.use("/admin", adminRoutes);
+
 
 // jalankan server
 const PORT = process.env.PORT || 5000;

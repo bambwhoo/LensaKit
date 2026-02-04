@@ -13,7 +13,7 @@ export default function Home() {
   const [gallery, setGallery] = useState([]);
   const [clients, setClients] = useState([]);
   const [services, setServices] = useState([]);
-  
+
 
   // Fetch Client
   useEffect(() => {
@@ -39,20 +39,20 @@ export default function Home() {
 
   // Fetch Gallery
   useEffect(() => {
-  const fetchGallery = async () => {
-    try {
-      const res = await api.get("/galleries");
-      setGallery(res.data);
-    } catch (err) {
-      console.error("Gagal fetch gallery:", err);
-    }
-  };
+    const fetchGallery = async () => {
+      try {
+        const res = await api.get("/galleries");
+        setGallery(res.data);
+      } catch (err) {
+        console.error("Gagal fetch gallery:", err);
+      }
+    };
 
-  fetchGallery();
-}, []);
+    fetchGallery();
+  }, []);
 
-    // Fetch Service
-    useEffect(() => {
+  // Fetch Service
+  useEffect(() => {
     const fetchServices = async () => {
       try {
         const res = await api.get("/services");
@@ -68,7 +68,7 @@ export default function Home() {
 
   return (
     <div className="w-full min-h-screen bg-white m-0 p-0">
-      
+
       {/* Hero */}
       <section
         id="home"
@@ -87,18 +87,18 @@ export default function Home() {
 
         {/* Content */}
         <div className="flex flex-col items-center space-y-8 lg:space-y-10 max-w-6xl transform -translate-y-16">
-        <div className="inline-flex items-center space-x-3 bg-teal-700/50 px-6 py-3 rounded-full text-lg">
-          <Award size={24} />
+          <div className="inline-flex items-center space-x-3 bg-teal-700/50 px-6 py-3 rounded-full text-lg">
+            <Award size={24} />
+          </div>
+
+          <h1 className="text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight">
+            <span className="text-teal-200">LensaKit</span>
+          </h1>
+
+          <p className="font-bold text-xl lg:text-2xl text-teal-50 max-w-3xl">
+            Capturing Moments, Telling Stories
+          </p>
         </div>
-
-        <h1 className="text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight">
-          <span className="text-teal-200">LensaKit</span>
-        </h1>
-
-        <p className="font-bold text-xl lg:text-2xl text-teal-50 max-w-3xl">
-          Capturing Moments, Telling Stories
-        </p>
-      </div>
       </section>
 
       {/* About Us */}
@@ -168,54 +168,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Service */}
-<section id="services" className="py-20 bg-white w-full">
-      <div className="max-w-[1920px] mx-auto px-6">
-        <h2 className="text-4xl font-bold mb-4">
-          Our <span className="text-teal-600">Photography Services</span>
-        </h2>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {services.map((s) => (
-            <div
-              key={s.id}
-              className="relative group overflow-hidden rounded-2xl shadow-lg cursor-pointer h-80 lg:h-96"
-            >
-              <img
-                src={s.image}
-                alt={s.title}
-                className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-              <div className="absolute bottom-6 left-6 text-white">
-                <h3 className="text-2xl font-bold mb-2">{s.title}</h3>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-      {/* Gallery */}
-      <section id="gallery" className="py-20 bg-gray-50 w-full">
+      {/* SERVICE SECTION */}
+      <section id="services" className="py-20 bg-white w-full">
         <div className="max-w-[1920px] mx-auto px-6">
-          <h2 className="text-4xl font-bold mb-4">Gallery</h2>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {gallery.map((item) => (
+          <h2 className="text-4xl font-bold mb-12">
+            Our <span className="text-teal-600">Photography Services</span>
+          </h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {services.map((s) => (
               <div
-                key={item.id}
-                className="group relative rounded-2xl overflow-hidden shadow-lg"
+                key={s.id}
+                className="relative group overflow-hidden rounded-2xl shadow-lg h-80 lg:h-96"
               >
+                {/* IMAGE */}
                 <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+                  src={s.image}
+                  alt={s.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
                 />
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
-                  <h3 className="text-white text-xl font-semibold">
-                    {item.title}
+
+                {/* OVERLAY */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+
+                {/* TEXT */}
+                <div className="absolute bottom-6 left-6 right-6 text-white">
+                  <h3 className="text-2xl font-bold mb-2">
+                    {s.name}
                   </h3>
+                  <p className="text-sm text-gray-200 line-clamp-3">
+                    {s.description}
+                  </p>
                 </div>
               </div>
             ))}
@@ -223,108 +205,151 @@ export default function Home() {
         </div>
       </section>
 
-{/* Client */}
-<section className="py-20 bg-white w-full">
-  <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
-    <div className="max-w-[1920px] mx-auto">
-      
-      <div className="text-center mb-16">
-        <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-          Our <span className="text-teal-600">Trusted Clients</span>
-        </h2>
-        <p className="text-gray-600 max-w-3xl mx-auto text-lg">
-          Dipercaya oleh berbagai perusahaan dan lembaga terkemuka untuk mengabadikan momen penting mereka
-        </p>
-      </div>
+      {/* Gallery */}
+      <section id="gallery" className="py-20 bg-gray-50 w-full">
+        <div className="max-w-[1920px] mx-auto px-6">
+          <h2 className="text-4xl font-bold mb-4">Gallery</h2>
 
-{/* Logo Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 lg:gap-8">
-  {clients.map((client) => (
-    <div
-      key={client.id}
-      className="bg-white border-2 border-gray-200 rounded-xl p-6 flex flex-col items-center justify-center
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[300px]">
+            {gallery.map((item, index) => {
+              // Pola 6 items per cycle untuk 4 kolom - sempurna tanpa gap
+              const getPattern = (idx) => {
+                const position = idx % 6;
+                switch (position) {
+                  case 0: return 'col-span-2 row-span-2'; // Besar kiri
+                  case 1: return 'col-span-1 row-span-1'; // Kecil
+                  case 2: return 'col-span-1 row-span-1'; // Tinggi
+                  case 3: return 'col-span-1 row-span-2'; // Kecil
+                  default: return 'col-span-1 row-span-1';
+                }
+              };
+
+              return (
+                <div
+                  key={item.id}
+                  className={`group relative rounded-2xl overflow-hidden shadow-lg col-span-1 row-span-1 md:${getPattern(index)}`}
+                >
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
+                    <h3 className="text-white text-xl font-semibold px-4 text-center">
+                      {item.title}
+                    </h3>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Client */}
+      <section className="py-20 bg-white w-full">
+        <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
+          <div className="max-w-[1920px] mx-auto">
+
+            <div className="text-center mb-16">
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                Our <span className="text-teal-600">Trusted Clients</span>
+              </h2>
+              <p className="text-gray-600 max-w-3xl mx-auto text-lg">
+                Dipercaya oleh berbagai perusahaan dan lembaga terkemuka untuk mengabadikan momen penting mereka
+              </p>
+            </div>
+
+            {/* Logo Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 lg:gap-8">
+              {clients.map((client) => (
+                <div
+                  key={client.id}
+                  className="bg-white border-2 border-gray-200 rounded-xl p-6 flex flex-col items-center justify-center
                  hover:border-teal-500 hover:shadow-xl transition-all duration-300 group"
-    >
-      <div className="w-full h-20 mb-4 flex items-center justify-center overflow-hidden rounded-lg">
-        <img
-          src={client.logo}
-          alt={client.name}
-          className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-        />
-      </div>
+                >
+                  <div className="w-full h-20 mb-4 flex items-center justify-center overflow-hidden rounded-lg">
+                    <img
+                      src={client.logo}
+                      alt={client.name}
+                      className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+                    />
+                  </div>
 
-      <h3 className="text-sm font-semibold text-gray-700 text-center group-hover:text-teal-600 transition">
-        {client.name}
-      </h3>
-    </div>
-  ))}
-      </div>
-    </div>
-  </div>
-</section>
+                  <h3 className="text-sm font-semibold text-gray-700 text-center group-hover:text-teal-600 transition">
+                    {client.name}
+                  </h3>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Article */}
-<section id="article" className="py-20 bg-gray-50 w-full">
-  <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
-    <div className="max-w-[1920px] mx-auto">
+      <section id="article" className="py-20 bg-gray-50 w-full">
+        <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
+          <div className="max-w-[1920px] mx-auto">
 
-      <div className="mb-16">
-        <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-          Latest News
-        </h2>
-        <p className="text-gray-600 text-lg">
-          Stay updated with our latest photography news
-        </p>
-      </div>
+            <div className="mb-16">
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                Latest News
+              </h2>
+              <p className="text-gray-600 text-lg">
+                Stay updated with our latest photography news
+              </p>
+            </div>
 
-      {loadingArtikel ? (
-        <p className="text-center text-gray-500">Loading artikel...</p>
-      ) : (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {artikels.map((item) => (
-  <div
-    key={item.id}
-    className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition group"
-  >
-    {/* Image */}
-    <div className="relative overflow-hidden h-48 lg:h-56">
-      <img
-        src={item.thumbnail}
-        alt={item.judul}
-        className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-      />
-    </div>
+            {loadingArtikel ? (
+              <p className="text-center text-gray-500">Loading artikel...</p>
+            ) : (
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {artikels.map((item) => (
+                  <div
+                    key={item.id}
+                    className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition group"
+                  >
+                    {/* Image */}
+                    <div className="relative overflow-hidden h-48 lg:h-56">
+                      <img
+                        src={item.thumbnail}
+                        alt={item.judul}
+                        className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                      />
+                    </div>
 
-    {/* Content */}
-    <div className="p-6">
-      <p className="text-sm text-gray-500 mb-1">{item.penulis}</p>
+                    {/* Content */}
+                    <div className="p-6">
+                      <p className="text-sm text-gray-500 mb-1">{item.penulis}</p>
 
-      <h3 className="text-xl font-bold text-gray-900 mb-3">
-        {item.judul}
-      </h3>
+                      <h3 className="text-xl font-bold text-gray-900 mb-3">
+                        {item.judul}
+                      </h3>
 
-      <p className="text-gray-600 mb-4 line-clamp-3">
-        {item.deskripsi}
-      </p>
+                      <p className="text-gray-600 mb-4 line-clamp-3">
+                        {item.deskripsi}
+                      </p>
 
-      <a
-        href={item.slug}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-teal-600 font-semibold hover:text-teal-700 transition"
-      >
-        Read More →
-      </a>
-    </div>
-  </div>
-))}
+                      <a
+                        href={item.slug}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-teal-600 font-semibold hover:text-teal-700 transition"
+                      >
+                        Read More →
+                      </a>
 
+
+                    </div>
+                  </div>
+                ))}
+
+              </div>
+            )}
+
+          </div>
         </div>
-      )}
-
-    </div>
-  </div>
-</section>
+      </section>
 
 
 
@@ -408,7 +433,7 @@ export default function Home() {
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
                     />
                   </div>
-            
+
                   {/* No HP */}
                   <div>
                     <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -424,7 +449,7 @@ export default function Home() {
                     />
                   </div>
                 </div>
-            
+
                 {/* Email */}
                 <div>
                   <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -439,7 +464,7 @@ export default function Home() {
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
                   />
                 </div>
-            
+
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Jenis Layanan */}
                   <div>
@@ -465,7 +490,7 @@ export default function Home() {
                       <option value="Other">Lainnya</option>
                     </select>
                   </div>
-            
+
                   {/* Tanggal */}
                   <div>
                     <label htmlFor="date" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -480,7 +505,7 @@ export default function Home() {
                     />
                   </div>
                 </div>
-            
+
                 {/* Lokasi */}
                 <div>
                   <label htmlFor="location" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -495,7 +520,7 @@ export default function Home() {
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition"
                   />
                 </div>
-            
+
                 {/* Pesan */}
                 <div>
                   <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -509,12 +534,12 @@ export default function Home() {
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition resize-none"
                   ></textarea>
                 </div>
-            
+
                 {/* Info Box */}
                 <div className="bg-teal-50 border border-teal-200 rounded-lg p-4 flex items-start space-x-3">
                   <div className="flex-shrink-0">
                     <svg className="w-6 h-6 text-teal-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"       clipRule="evenodd" />
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                     </svg>
                   </div>
                   <div className="flex-1">
@@ -523,7 +548,7 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-            
+
                 {/* Submit Button */}
                 <button
                   type="submit"
@@ -535,13 +560,13 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
                 </button>
-            
+
                 <p className="text-sm text-gray-500 text-center">
                   Dengan mengirim formulir ini, Anda setuju dengan kebijakan privasi kami
                 </p>
               </form>
             </div>
-            
+
             {/* Quick Contact Info */}
             <div className="mt-12 text-center">
               <p className="text-gray-600 mb-4">Atau hubungi kami langsung:</p>
@@ -565,7 +590,7 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            
+
           </div>
         </div>
       </section>

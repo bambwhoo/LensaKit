@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import AdminSidebar from "../components/admin/AdminSidebar";
-import slugify from "slugify";
 
 const Artikel = () => {
   const [artikels, setArtikels] = useState([]);
@@ -11,11 +10,12 @@ const Artikel = () => {
 
   const [form, setForm] = useState({
     judul: "",
-    slug: "",
+    slug: "", // ← ini sekarang link
     isi: "",
     thumbnail: "",
     penulis: "",
   });
+
 
   /* =====================
      FETCH ARTIKEL
@@ -60,38 +60,22 @@ const Artikel = () => {
 
     const method = isEdit ? "PUT" : "POST";
 
-    try {
-      await fetch(url, {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+    await fetch(url, {
+      method,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
         judul: form.judul,
-        slug: isEdit
-          ? form.slug // EDIT → pakai slug yang ada
-          : slugify(form.judul, { lower: true, strict: true }), // TAMBAH → auto
+        slug: form.slug,        // ✅ WAJIB ADA
         isi: form.isi,
         thumbnail: form.thumbnail,
         penulis: form.penulis,
-    }),
+      }),
+    });
 
-      });
-
-      setShowModal(false);
-      setIsEdit(false);
-      setEditId(null);
-      setForm({
-        judul: "",
-        slug: "",
-        isi: "",
-        thumbnail: "",
-        penulis: "",
-      });
-
-      fetchArtikel();
-    } catch (err) {
-      console.error("Submit error:", err);
-    }
+    fetchArtikel();
   };
+
+
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
 
@@ -134,8 +118,16 @@ const Artikel = () => {
             <tbody>
               {artikels.map((item) => (
                 <tr key={item.id} className="border-t">
-                  <td className="p-4">{item.judul}</td>
-                  <td className="p-4 text-sm text-gray-500">{item.slug}</td>
+                  <td className="p-4">
+                    {item.judul.length > 50
+                      ? item.judul.substring(0, 50) + "..."
+                      : item.judul}
+                  </td>
+                  <td className="p-4 text-sm text-gray-500">
+                    {item.slug.length > 40
+                      ? item.slug.substring(0, 40) + "..."
+                      : item.slug}
+                  </td>
                   <td className="p-4">{item.penulis || "-"}</td>
                   <td className="p-4 text-center">
                     <button
@@ -188,12 +180,13 @@ const Artikel = () => {
               {/* SLUG MANUAL */}
               <input
                 className="w-full mb-3 p-2 border rounded"
-                placeholder="Slug (boleh dikosongin)"
+                placeholder="Link Artikel (https://...)"
                 value={form.slug}
                 onChange={(e) =>
                   setForm({ ...form, slug: e.target.value })
                 }
               />
+
 
               <input
                 className="w-full mb-3 p-2 border rounded"
@@ -211,16 +204,6 @@ const Artikel = () => {
                 value={form.penulis}
                 onChange={(e) =>
                   setForm({ ...form, penulis: e.target.value })
-                }
-              />
-
-              <textarea
-                className="w-full mb-4 p-2 border rounded"
-                rows="5"
-                placeholder="Isi Artikel"
-                value={form.isi}
-                onChange={(e) =>
-                  setForm({ ...form, isi: e.target.value })
                 }
               />
 
