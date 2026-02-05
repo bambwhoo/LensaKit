@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import {
   Search, MapPin, Home as HomeIcon, Building2, Users,
   Award, TrendingUp, Shield, ChevronDown, Heart,
-  X, Menu, Mail, Phone, Facebook, Instagram, Twitter
+  X, Menu, Mail, Phone, Facebook, Instagram, Twitter,
+  Target, Rocket, CheckCircle2, Sparkles
 } from 'lucide-react';
 import api from "../api";
 
@@ -138,31 +139,105 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Visi & Misi */}
-            <div className="bg-gray-900 text-white rounded-2xl p-8 lg:p-12 relative overflow-hidden">
-              <div className="relative z-10">
-                <h3 className="text-2xl lg:text-3xl font-bold mb-6">Our Vision & Mission</h3>
+            {/* Visi & Misi - NEW IMPROVED LAYOUT */}
+            <div className="mt-16">
+              <div className="text-center mb-12">
+                <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                  Our Vision & <span className="text-teal-600">Mission</span>
+                </h3>
+                <p className="text-gray-600 max-w-2xl mx-auto">
+                  Guided by our vision to deliver excellence and driven by our mission to exceed expectations
+                </p>
+              </div>
 
-                {/* Visi */}
-                <div className="mb-8">
-                  <h4 className="text-lg lg:text-xl font-semibold mb-3 text-teal-300">Vision</h4>
-                  <p className="text-gray-300 text-base lg:text-lg">
-                    To be a trusted photography service that is able to present high-quality and emotionally valuable visual works.
-                  </p>
+              <div className="grid lg:grid-cols-2 gap-8">
+                {/* VISION CARD */}
+                <div className="group relative bg-gradient-to-br from-teal-50 to-white rounded-3xl p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-teal-100 overflow-hidden">
+                  {/* Decorative Element */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-teal-400/20 to-teal-600/20 rounded-full blur-3xl"></div>
+                  
+                  <div className="relative z-10">
+                    {/* Icon */}
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <Target size={32} className="text-white" />
+                    </div>
+
+                    {/* Title */}
+                    <h4 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 flex items-center">
+                      Vision
+                      <Sparkles size={24} className="ml-2 text-teal-600" />
+                    </h4>
+
+                    {/* Content */}
+                    <p className="text-gray-700 text-base lg:text-lg leading-relaxed">
+                      To be a trusted photography service that is able to present high-quality and emotionally valuable visual works.
+                    </p>
+                  </div>
+
+                  {/* Bottom Accent */}
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-teal-400 to-teal-600"></div>
                 </div>
 
-                {/* Misi */}
-                <div>
-                  <h4 className="text-lg lg:text-xl font-semibold mb-3 text-teal-300">Mission</h4>
-                  <ul className="list-disc list-inside space-y-2 text-gray-300 text-base lg:text-lg">
-                    <li>Capture the moment with a creative concept</li>
-                    <li>Providing professional and timely service</li>
-                    <li>Prioritize client satisfaction</li>
-                    <li>Keeping up with developments in photography technology</li>
-                  </ul>
+                {/* MISSION CARD */}
+                <div className="group relative bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-200 overflow-hidden">
+                  {/* Decorative Element */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-gray-300/20 to-gray-400/20 rounded-full blur-3xl"></div>
+                  
+                  <div className="relative z-10">
+                    {/* Icon */}
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-gray-700 to-gray-900 rounded-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <Rocket size={32} className="text-white" />
+                    </div>
+
+                    {/* Title */}
+                    <h4 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">
+                      Mission
+                    </h4>
+
+                    {/* Content */}
+                    <div className="space-y-4">
+                      <div className="flex items-start space-x-3 group/item">
+                        <div className="flex-shrink-0 mt-1">
+                          <CheckCircle2 size={20} className="text-teal-600 group-hover/item:scale-125 transition-transform" />
+                        </div>
+                        <p className="text-gray-700 text-base lg:text-lg">
+                          Capture the moment with a creative concept
+                        </p>
+                      </div>
+
+                      <div className="flex items-start space-x-3 group/item">
+                        <div className="flex-shrink-0 mt-1">
+                          <CheckCircle2 size={20} className="text-teal-600 group-hover/item:scale-125 transition-transform" />
+                        </div>
+                        <p className="text-gray-700 text-base lg:text-lg">
+                          Providing professional and timely service
+                        </p>
+                      </div>
+
+                      <div className="flex items-start space-x-3 group/item">
+                        <div className="flex-shrink-0 mt-1">
+                          <CheckCircle2 size={20} className="text-teal-600 group-hover/item:scale-125 transition-transform" />
+                        </div>
+                        <p className="text-gray-700 text-base lg:text-lg">
+                          Prioritize client satisfaction
+                        </p>
+                      </div>
+
+                      <div className="flex items-start space-x-3 group/item">
+                        <div className="flex-shrink-0 mt-1">
+                          <CheckCircle2 size={20} className="text-teal-600 group-hover/item:scale-125 transition-transform" />
+                        </div>
+                        <p className="text-gray-700 text-base lg:text-lg">
+                          Keeping up with developments in photography technology
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Accent */}
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-gray-600 to-gray-900"></div>
                 </div>
               </div>
-              <div className="absolute right-0 bottom-0 w-64 h-64 bg-teal-600/20 rounded-full blur-3xl"></div>
             </div>
           </div>
         </div>
