@@ -155,7 +155,7 @@ export default function Home() {
                 <div className="group relative bg-gradient-to-br from-teal-50 to-white rounded-3xl p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-teal-100 overflow-hidden">
                   {/* Decorative Element */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-teal-400/20 to-teal-600/20 rounded-full blur-3xl"></div>
-                  
+
                   <div className="relative z-10">
                     {/* Icon */}
                     <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
@@ -182,7 +182,7 @@ export default function Home() {
                 <div className="group relative bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-gray-200 overflow-hidden">
                   {/* Decorative Element */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-gray-300/20 to-gray-400/20 rounded-full blur-3xl"></div>
-                  
+
                   <div className="relative z-10">
                     {/* Icon */}
                     <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-gray-700 to-gray-900 rounded-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
@@ -472,20 +472,20 @@ export default function Home() {
                 const message = formData.get('message');
                 const whatsappMessage = `Halo LensaKit, saya ingin memesan layanan fotografi:
               
-      📝 *INFORMASI PEMESANAN*
-      *Nama:* ${name}
-      *No. HP:* ${phone}
-      *Email:* ${email}
-              
-      📸 *DETAIL LAYANAN*
-      *Jenis Layanan:* ${service}
-      *Tanggal Acara:* ${date}
-      *Lokasi:* ${location}
-              
-      💬 *Pesan Tambahan:*
-      ${message || 'Tidak ada'}
-              
-      Mohon informasi lebih lanjut mengenai paket dan harga. Terima kasih!`;
+                  📝 *INFORMASI PEMESANAN*
+                  *Nama:* ${name}
+                  *No. HP:* ${phone}
+                  *Email:* ${email}
+                          
+                  📸 *DETAIL LAYANAN*
+                  *Jenis Layanan:* ${service}
+                  *Tanggal Acara:* ${date}
+                  *Lokasi:* ${location}
+                          
+                  💬 *Pesan Tambahan:*
+                  ${message || 'Tidak ada'}
+                          
+                  Mohon informasi lebih lanjut mengenai paket dan harga. Terima kasih!`;
 
                 const encodedMessage = encodeURIComponent(whatsappMessage);
                 const whatsappURL = `https://wa.me/6289505837367?text=${encodedMessage}`;
