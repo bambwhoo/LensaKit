@@ -413,7 +413,7 @@ export default function Home() {
       Mohon informasi lebih lanjut mengenai paket dan harga. Terima kasih!`;
 
                 const encodedMessage = encodeURIComponent(whatsappMessage);
-                const whatsappURL = `https://wa.me/6281234567890?text=${encodedMessage}`;
+                const whatsappURL = `https://wa.me/6289505837367?text=${encodedMessage}`;
 
                 window.open(whatsappURL, '_blank');
               }}>
