@@ -34,17 +34,16 @@ const AdminSidebar = () => {
         <p className="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-3 px-3">
           Menu
         </p>
-        
+
         {menus.map((menu) => (
           <NavLink
             key={menu.path}
             to={menu.path}
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition-all
-              ${
-                isActive
-                  ? "bg-teal-600 text-white"
-                  : "text-gray-700 hover:bg-gray-100"
+              ${isActive
+                ? "bg-teal-600 text-white"
+                : "text-gray-700 hover:bg-gray-100"
               }`
             }
           >

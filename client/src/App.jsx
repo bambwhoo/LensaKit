@@ -19,8 +19,8 @@ export default function App() {
     <Routes>
       {/* CLIENT */}
       <Route element={<Layout />}>
-      <Route path="/" element={<Home />} />
-      <Route path="/artikel/:slug" element={<ArtikelDetail />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/artikel/:slug" element={<ArtikelDetail />} />
 
       </Route>
 
@@ -28,7 +28,7 @@ export default function App() {
       <Route path="/login" element={<Login />} />
 
       {/* ADMIN */}
-      <Route path="/admin" element={<AdminSidebar />}/>
+      <Route path="/admin" element={<AdminSidebar />} />
       <Route path="/admin/dashboard" element={<Dashboard />} />
       <Route path="/admin/gallery" element={<Gallery />} />
       <Route path="/admin/client" element={<Client />} />

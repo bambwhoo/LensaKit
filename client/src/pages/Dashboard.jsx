@@ -15,30 +15,30 @@ const Dashboard = () => {
 
   // MENU SESUAI TABEL DATABASE
   const menus = [
-    { 
-      name: "Artikel", 
-      table: "artikel", 
+    {
+      name: "Artikel",
+      table: "artikel",
       icon: "📝",
       description: "Buat & edit artikel blog",
       count: "24"
     },
-    { 
-      name: "Client", 
-      table: "client", 
+    {
+      name: "Client",
+      table: "client",
       icon: "👥",
       description: "Kelola data klien Anda",
       count: "48"
     },
-    { 
-      name: "Gallery", 
-      table: "gallery", 
+    {
+      name: "Gallery",
+      table: "gallery",
       icon: "🖼️",
       description: "Upload foto & portfolio",
       count: "156"
     },
-    { 
-      name: "Service", 
-      table: "Service", 
+    {
+      name: "Service",
+      table: "Service",
       icon: "🛠️",
       description: "Kelola layanan bisnis",
       count: "8"

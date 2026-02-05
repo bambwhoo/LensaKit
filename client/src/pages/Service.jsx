@@ -128,8 +128,8 @@ export default function ServiceAdmin() {
                 </tr>
               ) : (
                 services.map((s) => (
-                  <tr 
-                    key={s.id} 
+                  <tr
+                    key={s.id}
                     className="border-t hover:bg-gray-50 cursor-pointer transition-colors"
                     onClick={() => window.location.href = '/#contact'}
                   >
