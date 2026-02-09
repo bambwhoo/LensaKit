@@ -46,3 +46,22 @@ export const deleteGallery = (req, res) => {
     }
   );
 };
+
+// UPDATE
+export const updateGallery = (req, res) => {
+  const { title, image } = req.body;
+
+  db.query(
+    "UPDATE gallery SET title = ?, image = ? WHERE id = ?",
+    [title, image, req.params.id],
+    (err, result) => {
+      if (err) return res.status(500).json({ message: err.message });
+
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Gallery tidak ditemukan" });
+      }
+
+      res.json({ message: "Gallery berhasil diupdate" });
+    }
+  );
+};

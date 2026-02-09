@@ -152,7 +152,7 @@ export default function Home() {
 
               <div className="grid lg:grid-cols-2 gap-8">
                 {/* VISION CARD */}
-                <div className="group relative bg-gradient-to-br from-teal-50 to-white rounded-3xl p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-teal-100 overflow-hidden">
+                <div className="group relative bg-gradient-to-br from-teal-50 to-white rounded-3xl p-8 lg:p-10 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-teal-500 overflow-hidden">
                   {/* Decorative Element */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-teal-400/20 to-teal-600/20 rounded-full blur-3xl"></div>
 
@@ -687,7 +687,7 @@ export default function Home() {
                 <ul className="space-y-2 text-gray-400 text-sm">
                   <li><a href="#home" className="hover:text-white transition">Home</a></li>
                   <li><a href="#services" className="hover:text-white transition">Services</a></li>
-                  <li><a href="#properties" className="hover:text-white transition">Portfolio</a></li>
+                  <li><a href="#gallery" className="hover:text-white transition">Gallery</a></li>
                   <li><a href="#contact" className="hover:text-white transition">Contact</a></li>
                 </ul>
               </div>
@@ -697,7 +697,7 @@ export default function Home() {
                 <ul className="space-y-2 text-gray-400 text-sm">
                   <li className="flex items-center">
                     <Phone size={16} className="mr-2" />
-                    +62 812-3456-7890
+                    +62 895-0583-7367
                   </li>
                   <li className="flex items-center">
                     <Mail size={16} className="mr-2" />
@@ -720,7 +720,7 @@ export default function Home() {
                     <Instagram size={20} />
                   </a>
                   <a href="#" className="bg-gray-800 p-3 rounded-full hover:bg-gray-700 transition">
-                    <Twitter size={20} />
+                    <Twitter    size={20} />
                   </a>
                 </div>
               </div>
