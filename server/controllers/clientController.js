@@ -1,39 +1,32 @@
 import db from "../db/connection.js";
 
-/**
- * GET ALL CLIENTS
- * GET /api/client
- */
+/* =====================
+   GET CLIENTS
+===================== */
 export const getClients = (req, res) => {
-  const sql = "SELECT * FROM client ORDER BY id DESC";
-
-  db.query(sql, (err, results) => {
-    if (err) {
-      console.error("Get Clients Error:", err);
-      return res.status(500).json({ message: "Gagal mengambil data client" });
-    }
-
+  db.query("SELECT * FROM client ORDER BY id DESC", (err, results) => {
+    if (err) return res.status(500).json({ message: "Gagal ambil client" });
     res.json(results);
   });
 };
 
-/**
- * CREATE CLIENT
- * POST /api/client
- */
+/* =====================
+   CREATE CLIENT
+===================== */
 export const createClient = (req, res) => {
-  const { name, logo } = req.body;
+  const { name } = req.body;
+  const logo = req.file ? req.file.filename : null;
 
   if (!name || !logo) {
-    return res.status(400).json({ message: "Name dan logo wajib diisi" });
+    return res.status(400).json({ message: "Nama & logo wajib diisi" });
   }
 
   const sql = "INSERT INTO client (name, logo) VALUES (?, ?)";
 
   db.query(sql, [name, logo], (err, result) => {
     if (err) {
-      console.error("Create Client Error:", err);
-      return res.status(500).json({ message: "Gagal menambah client" });
+      console.error(err);
+      return res.status(500).json({ message: "Gagal tambah client" });
     }
 
     res.json({
@@ -43,19 +36,27 @@ export const createClient = (req, res) => {
   });
 };
 
-/**
- * UPDATE CLIENT
- * PUT /api/client/:id
- */
+/* =====================
+   UPDATE CLIENT
+===================== */
 export const updateClient = (req, res) => {
   const { id } = req.params;
-  const { name, logo } = req.body;
+  const { name } = req.body;
 
-  const sql = "UPDATE client SET name = ?, logo = ? WHERE id = ?";
+  let sql = "UPDATE client SET name = ?";
+  let params = [name];
 
-  db.query(sql, [name, logo, id], (err) => {
+  if (req.file) {
+    sql += ", logo = ?";
+    params.push(req.file.filename);
+  }
+
+  sql += " WHERE id = ?";
+  params.push(id);
+
+  db.query(sql, params, (err) => {
     if (err) {
-      console.error("Update Client Error:", err);
+      console.error(err);
       return res.status(500).json({ message: "Gagal update client" });
     }
 
@@ -63,21 +64,12 @@ export const updateClient = (req, res) => {
   });
 };
 
-/**
- * DELETE CLIENT
- * DELETE /api/client/:id
- */
+/* =====================
+   DELETE CLIENT
+===================== */
 export const deleteClient = (req, res) => {
-  const { id } = req.params;
-
-  const sql = "DELETE FROM client WHERE id = ?";
-
-  db.query(sql, [id], (err) => {
-    if (err) {
-      console.error("Delete Client Error:", err);
-      return res.status(500).json({ message: "Gagal menghapus client" });
-    }
-
+  db.query("DELETE FROM client WHERE id = ?", [req.params.id], (err) => {
+    if (err) return res.status(500).json({ message: "Gagal hapus client" });
     res.json({ message: "Client berhasil dihapus" });
   });
 };

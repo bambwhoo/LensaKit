@@ -257,7 +257,7 @@ export default function Home() {
               >
                 {/* IMAGE */}
                 <img
-                  src={s.image}
+                 src={`http://localhost:5000/images/service/${s.image}`}
                   alt={s.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
                 />
@@ -305,7 +305,7 @@ export default function Home() {
                   className={`group relative rounded-2xl overflow-hidden shadow-lg col-span-1 row-span-1 md:${getPattern(index)}`}
                 >
                   <img
-                    src={item.image}
+                    src={`http://localhost:5000/images/galeri/${item.image}`}
                     alt={item.title}
                     className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
                   />
@@ -345,7 +345,7 @@ export default function Home() {
                 >
                   <div className="w-full h-20 mb-4 flex items-center justify-center overflow-hidden rounded-lg">
                     <img
-                      src={client.logo}
+                      src={`http://localhost:5000/images/client/${client.logo}`}
                       alt={client.name}
                       className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
                     />
@@ -387,7 +387,7 @@ export default function Home() {
                     {/* Image */}
                     <div className="relative overflow-hidden h-48 lg:h-56">
                       <img
-                        src={item.thumbnail}
+                        src={`http://localhost:5000/images/artikel/${item.thumbnail}`}
                         alt={item.judul}
                         className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
                       />

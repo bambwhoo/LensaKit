@@ -4,22 +4,26 @@ import AdminSidebar from "../components/admin/AdminSidebar";
 
 const API_URL = "http://localhost:5000/api/client";
 
-export default function ClientAdmin() {
+const ClientAdmin = () => {
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editId, setEditId] = useState(null);
 
+  const [logoFile, setLogoFile] = useState(null);
+  const [preview, setPreview] = useState(null);
+
   const [form, setForm] = useState({
     name: "",
-    logo: "",
   });
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-  // 🔐 PROTECT PAGE
+  /* =====================
+     PROTECT PAGE
+  ===================== */
   useEffect(() => {
     if (!token) {
       navigate("/login");
@@ -29,7 +33,7 @@ export default function ClientAdmin() {
   }, []);
 
   /* =====================
-     FETCH CLIENTS
+     FETCH CLIENT
   ===================== */
   const fetchClients = async () => {
     try {
@@ -39,11 +43,9 @@ export default function ClientAdmin() {
         },
       });
       const data = await res.json();
-
       setClients(data);
     } catch (err) {
-      console.error("Fetch client error:", err);
-      alert("Gagal mengambil data client");
+      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -55,19 +57,14 @@ export default function ClientAdmin() {
   const handleDelete = async (id) => {
     if (!confirm("Yakin hapus client ini?")) return;
 
-    try {
-      await fetch(`${API_URL}/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    await fetch(`${API_URL}/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-      fetchClients();
-    } catch (err) {
-      console.error("Delete error:", err);
-      alert("Gagal menghapus client");
-    }
+    fetchClients();
   };
 
   /* =====================
@@ -77,50 +74,56 @@ export default function ClientAdmin() {
     const url = isEdit ? `${API_URL}/${editId}` : API_URL;
     const method = isEdit ? "PUT" : "POST";
 
-    try {
-      await fetch(url, {
-        method,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          name: form.name,
-          logo: form.logo,
-        }),
-      });
+    const data = new FormData();
+    data.append("name", form.name);
 
-      setShowModal(false);
-      setIsEdit(false);
-      setEditId(null);
-      setForm({
-        name: "",
-        logo: "",
-      });
-
-      fetchClients();
-    } catch (err) {
-      console.error("Submit error:", err);
-      alert(isEdit ? "Gagal mengupdate client" : "Gagal menambah client");
+    if (logoFile) {
+      data.append("logo", logoFile);
     }
+
+    await fetch(url, {
+      method,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: data,
+    });
+
+    setShowModal(false);
+    setIsEdit(false);
+    setEditId(null);
+    setLogoFile(null);
+    setPreview(null);
+    setForm({ name: "" });
+
+    fetchClients();
   };
 
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
+  if (loading) {
+    return (
+      <div className="min-h-screen flex">
+        <AdminSidebar />
+        <main className="flex-1 flex items-center justify-center">
+          <p>Loading...</p>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex bg-gray-100">
       <AdminSidebar />
 
       <main className="flex-1 p-8">
+        {/* HEADER */}
         <div className="flex justify-between mb-6">
           <h1 className="text-3xl font-bold">Manajemen Client</h1>
           <button
             onClick={() => {
               setIsEdit(false);
-              setForm({
-                name: "",
-                logo: "",
-              });
+              setForm({ name: "" });
+              setLogoFile(null);
+              setPreview(null);
               setShowModal(true);
             }}
             className="bg-teal-600 text-white px-5 py-2 rounded"
@@ -130,20 +133,19 @@ export default function ClientAdmin() {
         </div>
 
         {/* TABLE */}
-        <div className="bg-white rounded-xl shadow">
+        <div className="bg-white rounded-xl shadow overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-100">
               <tr>
                 <th className="p-4">Logo</th>
                 <th className="p-4">Nama Client</th>
-                <th className="p-4">Logo URL</th>
                 <th className="p-4 text-center">Aksi</th>
               </tr>
             </thead>
             <tbody>
               {clients.length === 0 ? (
                 <tr>
-                  <td colSpan="4" className="p-8 text-center text-gray-500">
+                  <td colSpan="3" className="p-6 text-center text-gray-500">
                     Belum ada client
                   </td>
                 </tr>
@@ -152,26 +154,26 @@ export default function ClientAdmin() {
                   <tr key={item.id} className="border-t">
                     <td className="p-4">
                       <img
-                        src={item.logo}
-                        alt={item.name}
-                        className="h-12 w-12 object-contain"
+                        src={`http://localhost:5000/images/client/${item.logo}`}
+                        className="h-14 w-14 object-contain rounded"
+                        onError={(e) => (e.target.src = "/no-image.png")}
                       />
                     </td>
                     <td className="p-4 font-semibold">{item.name}</td>
-                    <td className="p-4 text-sm text-gray-500">
-                      {item.logo.length > 50
-                        ? item.logo.substring(0, 50) + "..."
-                        : item.logo}
-                    </td>
                     <td className="p-4 text-center">
                       <button
                         onClick={() => {
                           setIsEdit(true);
                           setEditId(item.id);
-                          setForm({
-                            name: item.name,
-                            logo: item.logo,
-                          });
+                          setForm({ name: item.name });
+
+                          setPreview(
+                            item.logo
+                              ? `http://localhost:5000/images/client/${item.logo}`
+                              : null
+                          );
+
+                          setLogoFile(null);
                           setShowModal(true);
                         }}
                         className="bg-blue-500 text-white px-3 py-1 rounded mr-2"
@@ -194,7 +196,7 @@ export default function ClientAdmin() {
 
         {/* MODAL */}
         {showModal && (
-          <div className="fixed inset-0 bg-black/40 flex justify-center items-center">
+          <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
             <div className="bg-white p-6 rounded w-full max-w-lg">
               <h2 className="text-xl font-bold mb-4">
                 {isEdit ? "Edit Client" : "Tambah Client"}
@@ -207,29 +209,24 @@ export default function ClientAdmin() {
                 onChange={(e) =>
                   setForm({ ...form, name: e.target.value })
                 }
-                required
               />
 
               <input
-                className="w-full mb-3 p-2 border rounded"
-                placeholder="Logo URL"
-                value={form.logo}
-                onChange={(e) =>
-                  setForm({ ...form, logo: e.target.value })
-                }
-                required
+                type="file"
+                accept="image/*"
+                className="w-full mb-3"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  setLogoFile(file);
+                  setPreview(URL.createObjectURL(file));
+                }}
               />
 
-              {/* Preview Logo */}
-              {form.logo && (
-                <div className="mb-4">
-                  <p className="text-sm text-gray-600 mb-2">Preview:</p>
-                  <img
-                    src={form.logo}
-                    alt="Preview"
-                    className="h-20 object-contain border rounded p-2"
-                  />
-                </div>
+              {preview && (
+                <img
+                  src={preview}
+                  className="h-24 object-contain rounded border p-2 mb-3"
+                />
               )}
 
               <div className="flex justify-end gap-2">
@@ -252,4 +249,6 @@ export default function ClientAdmin() {
       </main>
     </div>
   );
-}
+};
+
+export default ClientAdmin;

@@ -1,11 +1,17 @@
 import express from "express";
-import { getArtikels, createArtikel, deleteArtikel, updateArtikel } from "../controllers/artikelController.js";
+import upload from "../middlewares/upload.js";
+import {
+  getArtikel,
+  createArtikel,
+  updateArtikel,
+  deleteArtikel,
+} from "../controllers/artikelController.js";
 
 const router = express.Router();
 
-router.get("/", getArtikels);
-router.post("/", createArtikel);
+router.get("/", getArtikel);
+router.post("/", upload.single("thumbnail"), createArtikel);
+router.put("/:id", upload.single("thumbnail"), updateArtikel);
 router.delete("/:id", deleteArtikel);
-router.put("/:id", updateArtikel);
 
 export default router;

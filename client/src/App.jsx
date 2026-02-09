@@ -12,7 +12,6 @@ import Client from "./pages/Client";
 // Admin Pages
 import Dashboard from "./pages/Dashboard";
 import Gallery from "./pages/Gallery";
-import ArtikelDetail from "./pages/ArtikelDetail";
 
 export default function App() {
   return (
@@ -20,7 +19,6 @@ export default function App() {
       {/* CLIENT */}
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/artikel/:slug" element={<ArtikelDetail />} />
 
       </Route>
 

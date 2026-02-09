@@ -1,6 +1,6 @@
+// controllers/galleryController.js
 import db from "../db/connection.js";
 
-// GET ALL
 export const getGalleries = (req, res) => {
   db.query("SELECT * FROM gallery ORDER BY id DESC", (err, rows) => {
     if (err) return res.status(500).json({ message: err.message });
@@ -8,60 +8,51 @@ export const getGalleries = (req, res) => {
   });
 };
 
-// GET BY ID
-export const getGalleryById = (req, res) => {
-  db.query(
-    "SELECT * FROM gallery WHERE id = ?",
-    [req.params.id],
-    (err, rows) => {
-      if (err) return res.status(500).json({ message: err.message });
-      res.json(rows[0]);
-    }
-  );
-};
-
-// CREATE
 export const createGallery = (req, res) => {
-  const { title, image } = req.body;
+  const { title } = req.body;
+  const image = req.file ? req.file.filename : null;
+
+  if (!title || !image) {
+    return res.status(400).json({ message: "Judul & gambar wajib diisi" });
+  }
+
   db.query(
     "INSERT INTO gallery (title, image) VALUES (?, ?)",
     [title, image],
     (err, result) => {
       if (err) return res.status(500).json({ message: err.message });
-      res.json({ message: "Gallery berhasil ditambahkan", id: result.insertId });
+      res.json({ message: "Gallery berhasil ditambahkan" });
     }
   );
 };
 
-// DELETE
+export const updateGallery = (req, res) => {
+  const { title } = req.body;
+
+  let sql = "UPDATE gallery SET title = ?";
+  let params = [title];
+
+  if (req.file) {
+    sql += ", image = ?";
+    params.push(req.file.filename);
+  }
+
+  sql += " WHERE id = ?";
+  params.push(req.params.id);
+
+  db.query(sql, params, (err, result) => {
+    if (err) return res.status(500).json({ message: err.message });
+    res.json({ message: "Gallery berhasil diupdate" });
+  });
+};
+
 export const deleteGallery = (req, res) => {
   db.query(
     "DELETE FROM gallery WHERE id = ?",
     [req.params.id],
-    (err, result) => {
+    (err) => {
       if (err) return res.status(500).json({ message: err.message });
-      if (result.affectedRows === 0)
-        return res.status(404).json({ message: "Gallery tidak ditemukan" });
       res.json({ message: "Gallery berhasil dihapus" });
-    }
-  );
-};
-
-// UPDATE
-export const updateGallery = (req, res) => {
-  const { title, image } = req.body;
-
-  db.query(
-    "UPDATE gallery SET title = ?, image = ? WHERE id = ?",
-    [title, image, req.params.id],
-    (err, result) => {
-      if (err) return res.status(500).json({ message: err.message });
-
-      if (result.affectedRows === 0) {
-        return res.status(404).json({ message: "Gallery tidak ditemukan" });
-      }
-
-      res.json({ message: "Gallery berhasil diupdate" });
     }
   );
 };

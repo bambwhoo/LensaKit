@@ -1,4 +1,5 @@
 import express from "express";
+import upload from "../middlewares/upload.js";
 import {
   getClients,
   createClient,
@@ -9,8 +10,8 @@ import {
 const router = express.Router();
 
 router.get("/", getClients);
-router.post("/", createClient);
-router.put("/:id", updateClient);
+router.post("/", upload.single("logo"), createClient);
+router.put("/:id", upload.single("logo"), updateClient);
 router.delete("/:id", deleteClient);
 
 export default router;

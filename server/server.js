@@ -23,6 +23,8 @@ app.use("/api/artikel", artikelRoutes);
 app.use("/api/galleries", galleryRoutes);
 app.use("/api/services", serviceRoutes);
 
+app.use("/images", express.static("public/images"));
+
 // contoh route awal
 app.get("/", (req, res) => {
 res.json({ message: "API berhasil berjalan 🚀" });
