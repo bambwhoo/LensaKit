@@ -27,14 +27,17 @@ CREATE TABLE client (
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE event (
-    id INT(11) NOT NULL AUTO_INCREMENT,
-    title VARCHAR(150) NULL,
-    description TEXT NULL,
-    event_date DATE NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE events (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  title VARCHAR(150) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  slug VARCHAR(160) COLLATE utf8mb4_general_ci NOT NULL,
+  description TEXT COLLATE utf8mb4_general_ci DEFAULT NULL,
+  event_date DATE DEFAULT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY slug (slug)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 CREATE TABLE gallery (
     id INT(11) NOT NULL AUTO_INCREMENT,

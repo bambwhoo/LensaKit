@@ -9,7 +9,6 @@ export default function Sidebar() {
         <Link to="/admin/dashboard" className="hover:text-blue-400">Dashboard</Link>
         <Link to="/admin/artikel" className="hover:text-blue-400">Artikel</Link>
         <Link to="/admin/jasa" className="hover:text-blue-400">Jasa</Link>
-        <Link to="/admin/event" className="hover:text-blue-400">Event</Link>
         <Link to="/admin/gallery" className="hover:text-blue-400">Gallery</Link>
         <Link to="/admin/client" className="hover:text-blue-400">Client</Link>
       </nav>

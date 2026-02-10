@@ -4,7 +4,7 @@ import {
   Search, MapPin, Home as HomeIcon, Building2, Users,
   Award, TrendingUp, Shield, ChevronDown, Heart,
   X, Menu, Mail, Phone, Facebook, Instagram, Twitter,
-  Target, Rocket, CheckCircle2, Sparkles
+  Target, Rocket, CheckCircle2, Sparkles, Calendar
 } from 'lucide-react';
 import api from "../api";
 
@@ -65,7 +65,6 @@ export default function Home() {
 
     fetchServices();
   }, []);
-
 
   return (
     <div className="w-full min-h-screen bg-white m-0 p-0">
@@ -246,9 +245,14 @@ export default function Home() {
       {/* SERVICE SECTION */}
       <section id="services" className="py-20 bg-white w-full">
         <div className="max-w-[1920px] mx-auto px-6">
-          <h2 className="text-4xl font-bold mb-12">
-            Our <span className="text-teal-600">Photography Services</span>
-          </h2>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Our <span className="text-teal-600">Photography Service</span>
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Because every moment has a story, let us help you tell it beautifully.
+            </p>
+          </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {services.map((s) => (
               <div
@@ -257,7 +261,7 @@ export default function Home() {
               >
                 {/* IMAGE */}
                 <img
-                 src={`http://localhost:5000/images/service/${s.image}`}
+                  src={`http://localhost:5000/images/service/${s.image}`}
                   alt={s.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
                 />
@@ -283,8 +287,14 @@ export default function Home() {
       {/* Gallery */}
       <section id="gallery" className="py-20 bg-gray-50 w-full">
         <div className="max-w-[1920px] mx-auto px-6">
-          <h2 className="text-4xl font-bold mb-4">Gallery</h2>
-
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Stories in <span className="text-teal-600">the Lens</span>
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              From grand celebrations to intimate family moments, here's a portfolio of our best work.
+            </p>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[300px]">
             {gallery.map((item, index) => {
               // Pola 6 items per cycle untuk 4 kolom - sempurna tanpa gap
@@ -720,7 +730,7 @@ export default function Home() {
                     <Instagram size={20} />
                   </a>
                   <a href="#" className="bg-gray-800 p-3 rounded-full hover:bg-gray-700 transition">
-                    <Twitter    size={20} />
+                    <Twitter size={20} />
                   </a>
                 </div>
               </div>

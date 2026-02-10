@@ -14,6 +14,8 @@ const storage = multer.diskStorage({
       dir = "public/images/galeri";
     } else if (req.baseUrl.includes("services")) {
       dir = "public/images/service";
+    } else if (req.baseUrl.includes("event")) {
+      dir = "public/images/event"
     }
 
     // ⛑️ pastiin folder ada

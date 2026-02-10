@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import logo from "/public/logo-b.png";
 
 const AdminSidebar = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const AdminSidebar = () => {
     { name: "Client", path: "/admin/client", icon: "" },
     { name: "Gallery", path: "/admin/gallery", icon: "" },
     { name: "Service", path: "/admin/service", icon: "" },
+
   ];
 
   return (
@@ -22,8 +24,13 @@ const AdminSidebar = () => {
       {/* LOGO SECTION */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-1">
+          <img
+            src={logo}
+            alt="LensaKit Logo"
+            className="w-9 h-9 object-contain"
+          />
           <h2 className="text-xl font-bold text-gray-800">
-            Lensakit
+            LensaKit
           </h2>
         </div>
         <p className="text-gray-500 text-sm ml-12">Admin Panel</p>

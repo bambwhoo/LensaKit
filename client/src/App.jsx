@@ -2,14 +2,11 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import AdminSidebar from "./components/admin/AdminSidebar";
 
-// Client Pages
 import Home from "./pages/Home";
 import Service from "./pages/Service";
 import Artikel from "./pages/Artikel";
 import Login from "./pages/Login";
 import Client from "./pages/Client";
-
-// Admin Pages
 import Dashboard from "./pages/Dashboard";
 import Gallery from "./pages/Gallery";
 
@@ -24,7 +21,7 @@ export default function App() {
 
       {/* AUTH */}
       <Route path="/login" element={<Login />} />
-
+ 
       {/* ADMIN */}
       <Route path="/admin" element={<AdminSidebar />} />
       <Route path="/admin/dashboard" element={<Dashboard />} />
