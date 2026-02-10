@@ -341,7 +341,7 @@ export default function Home() {
                 Our <span className="text-teal-600">Trusted Clients</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto text-lg">
-                Dipercaya oleh berbagai perusahaan dan lembaga terkemuka untuk mengabadikan momen penting mereka
+                Trusted by various leading companies and institutions to capture their important moments.
               </p>
             </div>
 
@@ -376,9 +376,9 @@ export default function Home() {
         <div className="w-full px-6 sm:px-8 lg:px-12 xl:px-16">
           <div className="max-w-[1920px] mx-auto">
 
-            <div className="mb-16">
+            <div className="text-center mb-16">
               <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                Latest News
+                Latest <span className="text-teal-600">News</span>
               </h2>
               <p className="text-gray-600 text-lg">
                 Stay updated with our latest photography news
@@ -449,7 +449,7 @@ export default function Home() {
                 Contact <span className="text-teal-600">Us</span>
               </h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                Isi formulir di bawah ini dan kami akan menghubungkan Anda langsung ke WhatsApp untuk melanjutkan pemesanan
+                Fill out the form below and we will connect you directly to WhatsApp to continue your order.
               </p>
             </div>
 
